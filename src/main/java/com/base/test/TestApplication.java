@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 
 @SpringBootApplication()
 @MapperScan("com.base.test.mapper")
+
 public class TestApplication {
 
     public static void main(String[] args) {
