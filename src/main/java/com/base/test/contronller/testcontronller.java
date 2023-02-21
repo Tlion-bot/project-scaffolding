@@ -3,6 +3,7 @@ package com.base.test.contronller;
 import com.base.test.domain.Logintest;
 import com.base.test.mapper.LogintestMapper;
 import com.base.test.service.impl.LogintestServiceImpl;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,9 @@ public class testcontronller {
 
     @GetMapping("hello")
     public List<Logintest> hello(){
+//        Gson gson = new Gson();
+//        System.out.println(gson.toJson(logintestService.selectAll()));
+//        System.out.println(logintestService.selectAll());
         return logintestService.selectAll();
 
     }
