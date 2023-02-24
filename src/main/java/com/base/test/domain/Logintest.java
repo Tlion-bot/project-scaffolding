@@ -18,6 +18,7 @@ public class Logintest implements Serializable {
     /**
      * 
      */
+    private int id;
     private String username;
 
     /**
