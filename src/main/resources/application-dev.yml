@@ -1,3 +1,16 @@
+# 微信开发配置
+wx:
+  # 微信小程序开发
+  miniapp:
+    appid: wx5aeb5f43f96d6f26
+    secret: 5d81922d7d0eef387e6c9316553ffc69
+    # 配置消息推送需要
+    token: 123abc
+    aesKey: m35MWm85sH3iF2nJy774K03JN2Rg2U4G5kpWsELTaXf
+    msgDataFormat: JSON
+    # 存储类型
+    config-storage:
+      type: redistemplate
 
 
 # mybatis-plus相关配置
@@ -5,7 +18,7 @@ mybatis-plus:
   # xml扫描，多个目录用逗号或者分号分隔（告诉 Mapper 所对应的 XML 文件位置）
   mapper-locations: classpath*:mapper/*Mapper.xml
   # 指定实体类的包,多个package用逗号或者分号分隔
-  type-aliases-package: com.yuyun.*.dto
+
   # 以下配置均有默认值,可以不设置
   global-config:
     db-config:
@@ -23,14 +36,14 @@ mybatis-plus:
     # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
     # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 server:
-  port: 8081
+  port: 8080
 
   undertow:
     #    http post请求数量的最大值，0表示不限制
     max-http-post-size: 0
 
     accesslog:
-      dir: D://
+      dir: F://
       enabled: true
       pattern: common
       prefix: access_log

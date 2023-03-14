@@ -1,11 +1,9 @@
 package com.base.test.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-
 import com.base.test.domain.Logintest;
-import com.base.test.service.LogintestService;
 import com.base.test.mapper.LogintestMapper;
-import org.apache.ibatis.jdbc.Null;
+import com.base.test.service.LogintestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +21,11 @@ implements LogintestService{
     LogintestMapper logintestMapper;
     @Override
     public List<Logintest> selectAll(){
+        //aaaaaaa
+
+
+      Logintest logintest=new Logintest();
+
         return logintestMapper.selectAll();
     }
 }
