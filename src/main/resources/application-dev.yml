@@ -1,3 +1,5 @@
+upload:
+  path: F:\self\test_resources\
 # 微信开发配置
 wx:
   # 微信小程序开发
