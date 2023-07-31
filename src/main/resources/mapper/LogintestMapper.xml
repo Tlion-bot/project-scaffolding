@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.base.test.mapper.LogintestMapper">
 
-    <resultMap id="a" type="com.base.test.domain.Logintest">
+    <resultMap id="a" type="com.base.test.common.domain.Logintest">
 
     </resultMap>
     <select id="selectAll" resultMap="a">
