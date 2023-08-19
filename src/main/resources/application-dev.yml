@@ -14,6 +14,24 @@ wx:
     config-storage:
       type: redistemplate
 
+# 全局线程池相关配置
+thread-pool:
+  # 是否开启线程池
+  enabled: true
+  # 核心线程池大小
+  corePoolSize: 8
+  # 最大可创建的线程数
+  maxPoolSize: 16
+  # 队列最大长度
+  queueCapacity: 128
+  # 线程池维护线程所允许的空闲时间
+  keepAliveSeconds: 300
+  # 线程池对拒绝任务(无线程可用)的处理策略
+  # CallerRunsPolicy 等待
+  # DiscardOldestPolicy 放弃最旧的
+  # DiscardPolicy 丢弃
+  # AbortPolicy 中止
+  rejectedExecutionHandler: ''
 
 ## mybatis-plus相关配置
 #mybatis-plus:
@@ -39,25 +57,20 @@ wx:
 #    # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 mybatis-plus:
   # 自定义TypeHandler
-  type-handlers-package: com.base.common.typehandle
+  type-handlers-package: com.base.test.common.config.typehandle
   mapperPackage: com.base.**.mapper
   # 对应的 XML 文件位置
   mapperLocations: classpath*:mapper/**/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   # 实体扫描，多个package用逗号或者分号分隔
   typeAliasesPackage: com.base.**.domain
   global-config:
-    # 是否打印 Logo banner
-    banner: true
-    # 是否初始化 SqlRunner
-    enableSqlRunner: false
-    dbConfig:
-      # 主键类型
-      # AUTO 数据库ID自增
-      # NONE 空
-      # INPUT 用户输入ID
-      # ASSIGN_ID 全局唯一ID
-      # ASSIGN_UUID 全局唯一ID UUID
-      idType: AUTO
+    #是否控制台
+    banner: false
+    db-config:
+      #主键类型
+      id-type: auto
 
 server:
   port: 8080
