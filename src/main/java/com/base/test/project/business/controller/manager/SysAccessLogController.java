@@ -1,6 +1,7 @@
 package com.base.test.project.business.controller.manager;
 
 import cn.hutool.core.date.DateUtil;
+import com.base.test.common.annotation.RateLimit;
 import com.base.test.common.controller.BaseController;
 import com.base.test.common.core.domain.AjaxResult;
 import com.base.test.common.manager.AsyncManager;
@@ -53,8 +54,13 @@ public class SysAccessLogController extends BaseController {
         return AjaxResult.success();
     }
 
+    @GetMapping("/referer")
+    public AjaxResult referer(){
+        return AjaxResult.success();
+    }
+
     @GetMapping("/acccessLog/add")
-    // @RateLimit(key= "testLimit", count = 2, cycle = 1, msg = "访问过于频繁请稍后再试")
+    @RateLimit(key= "testLimit", count = 2, cycle = 1, msg = "访问过于频繁请稍后再试")
     public AjaxResult invoke(@RequestParam String requestUrl) throws Exception {
 
         switch (requestUrl) {

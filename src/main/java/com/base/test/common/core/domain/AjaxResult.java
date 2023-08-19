@@ -2,6 +2,7 @@ package com.base.test.common.core.domain;
 
 
 import cn.hutool.http.HttpStatus;
+import com.base.test.common.utils.MessageUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -104,6 +105,11 @@ public class AjaxResult<T> {
         return AjaxResult.error(msg, null);
     }
 
+    public static AjaxResult errorMessageCode(String messageCode, Object[] args)
+    {
+        String msg = MessageUtils.message(messageCode, args);
+        return AjaxResult.error(msg, null);
+    }
     /**
      * 返回错误消息
      *
