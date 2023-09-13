@@ -82,7 +82,7 @@ public class Generate {
         String serviceInterfacePath = basePath + "src/main/java/com/base/test/project/business/service/";
         String controllerPath = basePath + "src/main/java/com/base/test/project/business/controller/manager/";
         Map<String, String> names = new HashMap<>();
-        names.put("user", "User");
+        names.put("bs_policy", "BsPolicy");
         for (Map.Entry<String, String> entry : names.entrySet()) {
             generate("43.139.71.199", "3307", "test", "root", "1982570424",
                     entry.getKey(), entry.getValue(), basePackage, entityPath, mapperPath, xmlPath, servicePath, serviceInterfacePath,

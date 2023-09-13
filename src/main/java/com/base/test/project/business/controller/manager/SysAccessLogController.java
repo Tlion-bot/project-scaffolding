@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.CountDownLatch;
 
 
-
 @Slf4j
 @RequiredArgsConstructor
 @RestController
@@ -55,12 +54,22 @@ public class SysAccessLogController extends BaseController {
     }
 
     @GetMapping("/referer")
-    public AjaxResult referer(){
+    public AjaxResult referer() {
+
+        AsyncManager.me().execute(AsyncFactory.referer());
         return AjaxResult.success();
     }
 
+    /**
+     * TODO
+     *
+     * 接口调用日志
+     * @param requestUrl
+     * @return com.base.test.common.core.domain.AjaxResult
+     * @date 2023/8/19 16:41
+     */
     @GetMapping("/acccessLog/add")
-    @RateLimit(key= "testLimit", count = 2, cycle = 1, msg = "访问过于频繁请稍后再试")
+    @RateLimit(key = "testLimit", count = 2, cycle = 1, msg = "访问过于频繁请稍后再试")
     public AjaxResult invoke(@RequestParam String requestUrl) throws Exception {
 
         switch (requestUrl) {
@@ -74,40 +83,40 @@ public class SysAccessLogController extends BaseController {
                 requestUrl = "/mxcrm";
                 break;
             case "3":
-                requestUrl="/mxrtgc";
+                requestUrl = "/mxrtgc";
                 break;
             case "4":
-                requestUrl="/mxerp";
+                requestUrl = "/mxerp";
                 break;
             case "5":
-                requestUrl="/ecErp";
+                requestUrl = "/ecErp";
                 break;
             case "6":
-                requestUrl="/brand";
+                requestUrl = "/brand";
                 break;
             case "7":
-                requestUrl="/mmjj";
+                requestUrl = "/mmjj";
                 break;
             case "8":
-                requestUrl="/chanjet";
+                requestUrl = "/chanjet";
                 break;
             case "9":
-                requestUrl="/cjthsy";
+                requestUrl = "/cjthsy";
                 break;
             case "10":
-                requestUrl="/wms";
+                requestUrl = "/wms";
                 break;
             case "11":
-                requestUrl="/internet";
+                requestUrl = "/internet";
                 break;
             case "12":
-                requestUrl="/SupplyFinance";
+                requestUrl = "/SupplyFinance";
                 break;
             case "13":
-                requestUrl="/mxfinance";
+                requestUrl = "/mxfinance";
                 break;
             case "14":
-                requestUrl="/mxabout?active=0";
+                requestUrl = "/mxabout?active=0";
                 break;
             default:
                 return AjaxResult.success();
