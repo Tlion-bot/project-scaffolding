@@ -34,7 +34,11 @@ public class UserController {
 	 * 分页列表
 	 */
 	@PostMapping("pageList")
-	public AjaxResult<Page<User>> pageList(@RequestBody Page<User> page,@RequestBody User user) {
+	// public AjaxResult<Page<User>> pageList(@RequestBody Page<User> page,@RequestBody User user) {
+		public AjaxResult<Page<User>> pageList() {
+		 Page<User> page = new Page<User>(); User user=null;
+		 page.setSize(1);
+		 page.setTotal(10);
 		return AjaxResult.success(userService.pageList(page,user));
 	}
 
