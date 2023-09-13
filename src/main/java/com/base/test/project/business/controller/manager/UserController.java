@@ -50,7 +50,7 @@ public class UserController {
 	 * 新增
 	 */
 	@PostMapping("add")
-	public AjaxResult<Long> add() {
+	public AjaxResult<Long> add(@RequestBody String username,String password) {
 		return AjaxResult.success(userService.add());
 	}
 

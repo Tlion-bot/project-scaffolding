@@ -26,7 +26,17 @@ public class Logintest implements Serializable {
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
-/** 
+
+    @Override
+    public String toString() {
+        return "Logintest{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+    /**
  * TODO aa
  *  
  * @return long
