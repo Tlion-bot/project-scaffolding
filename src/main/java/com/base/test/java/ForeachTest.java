@@ -1,7 +1,10 @@
 package com.base.test.java;
 
+import com.base.test.common.utils.DateUtils;
+
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * foreach遍历list 慎用add remove
  * 增强for循环中，集合遍历是通过iterator进行的，但是元素的add/remove却是直接使用的集合类自己的方法。
@@ -21,5 +24,14 @@ public class ForeachTest {
             }
         }
         System.out.println(list);
+        System.out.println(DateUtils.dateTimeNow());
+        System.out.println(DateUtils.dateTimeNow("YYYYMMddHHmmss"));
+        System.out.println();
+
+
+
+
+
+
     }
 }

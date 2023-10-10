@@ -19,6 +19,7 @@
         <java.version>8</java.version>
         <poi.version>4.1.2</poi.version>
         <bitwalker.version>1.19</bitwalker.version>
+        <mybatis-plus.version>3.4.3</mybatis-plus.version>
     </properties>
     <dependencies>
 <!--        改动 Tomcat 改为 并发性能更好的 undertow-->
@@ -91,6 +92,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
         </dependency>
 
 <!--        &lt;!&ndash;spring security 安全框架&ndash;&gt;-->

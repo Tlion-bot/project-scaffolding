@@ -73,7 +73,7 @@ mybatis-plus:
       id-type: auto
 
 server:
-  port: 8080
+  port: 8089
 
   undertow:
     #    http post请求数量的最大值，0表示不限制

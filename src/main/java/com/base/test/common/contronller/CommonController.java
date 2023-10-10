@@ -36,6 +36,8 @@ public class CommonController {
             String originalFilename = files[i].getOriginalFilename();
             //获取文件名的后缀，如获取.jpg后缀
             String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
+
+
             //使用UUID重新生成文件名，防止文件名重复造成图片覆盖
             String fileName = UUID.randomUUID().toString() + suffix;
 
@@ -59,6 +61,8 @@ public class CommonController {
         object.put("文件名和路径", fileFullName);
         return object.toString();
     }
+
+
 
 
 // @PostMapping("/upload")

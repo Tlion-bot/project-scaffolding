@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>分页列表数据</title>
+  <meta charset="UTF-8">
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+<h2>分页列表数据</h2>
+
+<table id="data-table">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>password</th>
+  </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<script>
+  // 假设您有一个获取分页列表数据的接口，返回的数据格式为：
+  // {
+  //   data: [
+  //     { id: 1, name: 'John', email: 'john@example.com' },
+  //     { id: 2, name: 'Jane', email: 'jane@example.com' },
+  //     ...
+  //   ],
+  //   totalPages: 10,
+  //   currentPage: 1
+  // }
+  function fetchData(page) {
+    // 使用Ajax或fetch等方法发起API请求，获取分页数据
+    // 这里使用fetch示例，您需要根据实际情况进行修改
+    fetch(`/user/pageList`,{
+      method:'post',
+    })
+            .then(response => response.json())
+            .then(data => {
+              const tableBody = document.getElementById('data-table').getElementsByTagName('tbody')[0];
+              // 清空表格中的旧数据
+              while (tableBody.firstChild) {
+                tableBody.removeChild(tableBody.firstChild);
+              }
+              // 将新数据添加到表格中
+            data.data.records.forEach(records => {
+                const row = tableBody.insertRow();
+                const cell1 = row.insertCell();
+                const cell2 = row.insertCell();
+                const cell3 = row.insertCell();
+                // cell1.innerHTML = item.id;
+                cell1.innerHTML=records.id;
+                cell2.innerHTML = records.name;
+                cell3.innerHTML = records.password;
+              });
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+  }
+
+  // 初始加载第一页数据
+  fetchData(1);
+</script>
+</body>
+</html>
