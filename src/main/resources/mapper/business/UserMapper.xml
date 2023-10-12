@@ -8,6 +8,9 @@
     </select>
     <select id="pageList" resultType="com.base.test.project.business.domain.User">
         select *
-        FROM user
+        FROM user u
+        <if test="param.name != null and param.name != '' ">
+            where u.name = #{param.name}
+        </if>
     </select>
 </mapper>

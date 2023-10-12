@@ -61,8 +61,7 @@ mybatis-plus:
   mapperPackage: com.base.**.mapper
   # 对应的 XML 文件位置
   mapperLocations: classpath*:mapper/**/*Mapper.xml
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
   # 实体扫描，多个package用逗号或者分号分隔
   typeAliasesPackage: com.base.**.domain
   global-config:

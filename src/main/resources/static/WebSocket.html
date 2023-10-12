@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>websocket通讯</title>
+</head>
+
+<body>
+<p>userId：<input id="userId" name="userId" type="text" value="10"></p>
+<p>msg：<input id="contentText" name="contentText" type="text" value="hello websocket"></p>
+<p>操作：<button onclick="openSocket()">开启socket</button></p>
+<p>操作：<button onclick="sendMessage()">发送消息</button></p>
+</body>
+
+<script type="application/javascript">
+    let socket;
+    function openSocket() {
+        if(socket != null){
+            socket.close();
+            socket = null;
+        }
+        let userId = document.getElementById('userId').value
+        socket = new WebSocket("ws://localhost:8089/myService/"+userId);
+        //打开事件
+        socket.onopen = function() {
+            console.log("websocket已打开");
+        };
+        //获得消息事件
+        socket.onmessage = function(msg) {
+            console.log(msg.data);
+        };
+        //关闭事件
+        socket.onclose = function() {
+            console.log("websocket已关闭");
+        };
+        //发生了错误事件
+        socket.onerror = function() {
+            console.log("websocket发生了错误");
+        }
+    }
+    function sendMessage() {
+        let contentText = document.getElementById('contentText').value
+        socket.send(contentText);
+    }
+</script>
+</html>

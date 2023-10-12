@@ -9,6 +9,8 @@ import java.util.List;
 public interface UserService extends IService<User> {
 	Page<User> pageList(Page<User> page,User user);
 
+	Page<User> pageList();
+
 	Long detail(Long id);
 
 	Long add();

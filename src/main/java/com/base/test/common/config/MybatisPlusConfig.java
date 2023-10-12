@@ -44,7 +44,13 @@ public class MybatisPlusConfig {
 	 * 分页插件，自动识别数据库类型
 	 * https://baomidou.com/guide/interceptor-pagination.html
 	 */
-	public PaginationInnerInterceptor paginationInnerInterceptor() {
+	public PaginationInnerInterceptor
+
+
+
+
+	paginationInnerInterceptor() {
+
 		PaginationInnerInterceptor paginationInnerInterceptor = new PaginationInnerInterceptor();
 		// 设置数据库类型为mysql
 		paginationInnerInterceptor.setDbType(DbType.MYSQL);
