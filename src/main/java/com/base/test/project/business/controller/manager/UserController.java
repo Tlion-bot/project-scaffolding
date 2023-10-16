@@ -16,7 +16,6 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,7 +44,7 @@ public class UserController {
 	 * 分页列表
 	 */
 	@PostMapping("pageList")
-	public AjaxResult<Page<User>> pageList(@Validated @RequestBody Page<User> page,@Validated @RequestBody User user) {
+	public AjaxResult<Page<User>> pageList(@RequestBody Page<User> page,@RequestBody User user) {
 		// public AjaxResult<Page<User>> pageList() {
 		//  Page<User> page = new Page<User>(); User user=null;
 		//  page.setSize(1);

@@ -32,6 +32,8 @@ public class SyncTask {
                 //覆盖另一张表
 
                 if (userCopyService.lambdaQuery().eq(UserCopy::getName, user.getName()).count()<=0){
+
+
                     UserCopy userCopy=BeanUtil.copyProperties(user,UserCopy.class);
                     userCopyService.save(userCopy);
                 }

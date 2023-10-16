@@ -5,8 +5,7 @@ package com.base.test.common.constant;
  *
  * @author ruoyi
  */
-public class Constants
-{
+public class Constants {
     /**
      * UTF-8 字符集
      */
@@ -130,15 +129,15 @@ public class Constants
      */
     public static final String RESOURCE_PREFIX = "/profile";
 
-	/**
-	 * RMI 远程方法调用
-	 */
-	public static final String LOOKUP_RMI = "rmi://";
+    /**
+     * RMI 远程方法调用
+     */
+    public static final String LOOKUP_RMI = "rmi://";
 
-	/**
-	 * 资源映射路径 前缀
-	 */
-	public static final String REDIS_LOCK_KEY = "redis_lock:";
+    /**
+     * 资源映射路径 前缀
+     */
+    public static final String REDIS_LOCK_KEY = "redis_lock:";
 
     /**
      * 0
@@ -157,7 +156,7 @@ public class Constants
 
     public static final int TV_TIME = 60;
 
-    public static final int TV_TIME_OUT = 7 * 24 * 60 * 1000 *1000; //tv token有效期7天
+    public static final int TV_TIME_OUT = 7 * 24 * 60 * 1000 * 1000; //tv token有效期7天
 
     /**
      * 默认密码
@@ -167,7 +166,7 @@ public class Constants
     /**
      * 水印
      */
-    public static final String  WATERMARK_CODE = "?x-image-process=style/style-50d5";
+    public static final String WATERMARK_CODE = "?x-image-process=style/style-50d5";
 
     /**
      * 手机号码正则表达式
@@ -195,6 +194,15 @@ public class Constants
     public static final String WX_PUSH_SUBSCRIBE_URL = "https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=";
     /**
      * 库存预警推送模板
-     * */
+     */
     public static final String WX_PURCHASE_STOCK_WARN_TEMPLATE = "bp04jKdoCdDY7PAtvWbGpF_L6XhSYhnh6zXD8f1enBs";
+
+    public static final String REGEX_MOBILE_PHONE = "(13|14|15|16|17|18)\\d{9}";
+    public static final String MESSAGE_MOBILE_PHONE = "手机号码格式错误，请重新输入";
+    public static final String REGEX_PASSWORD = "(?=.*[a-zA-Z])(?=.*[`~!@#$%^&*()_\\-=+\\[\\]{};:'\"\\\\|,<.>/?])(?=.*\\d)[\\s\\S]{8,18}";
+    public static final String MESSAGE_PASSWORD = "密码位数为8至18位，必须包含字母、数字、特殊字符（`~!@#$%^&*()_-=+[]{};:'\"\\\\|,<.>/?）";
+    public static final String REGEX_USERNAME = "[a-zA-Z0-9_]{6,25}";
+    public static final String MESSAGE_USERNAME = "用户名只能使用数字、字母、下划线，长度为2至25位";
+    public static final String REGEX_PHONE_CODE = "\\d{4,6}";
+    public static final String MESSAGE_PHONE_CODE = "验证码格式错误";
 }

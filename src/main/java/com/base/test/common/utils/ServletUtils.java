@@ -13,7 +13,7 @@ import java.io.IOException;
 
 /**
  * 客户端工具类
- * 
+ *
  * @author
  */
 public class ServletUtils extends ServletUtil
@@ -82,7 +82,7 @@ public class ServletUtils extends ServletUtil
 
     /**
      * 将字符串渲染到客户端
-     * 
+     *
      * @param response 渲染对象
      * @param string 待渲染的字符串
      * @return null
@@ -105,7 +105,7 @@ public class ServletUtils extends ServletUtil
 
     /**
      * 是否是Ajax异步请求
-     * 
+     *
      * @param request
      */
     public static boolean isAjaxRequest(HttpServletRequest request)
@@ -134,5 +134,8 @@ public class ServletUtils extends ServletUtil
             return true;
         }
         return false;
+    }
+    public static String getClientIP() {
+        return getClientIP(getRequest());
     }
 }

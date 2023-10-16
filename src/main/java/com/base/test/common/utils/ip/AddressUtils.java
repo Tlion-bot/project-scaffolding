@@ -1,7 +1,6 @@
 package com.base.test.common.utils.ip;
 
 import com.alibaba.fastjson.JSONObject;
-import com.base.test.common.config.JxbsConfig;
 import com.base.test.common.constant.Constants;
 import com.base.test.common.utils.StringUtils;
 import com.base.test.common.utils.http.HttpUtils;
@@ -31,7 +30,7 @@ public class AddressUtils
         {
             return "内网IP";
         }
-        if (JxbsConfig.isAddressEnabled())
+        if (1==1)
         {
             try
             {
