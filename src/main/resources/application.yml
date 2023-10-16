@@ -1,4 +1,7 @@
 spring:
+  messages:
+    # 国际化资源文件路径
+    basename: i18n/messages
   profiles:
     active: dev
   datasource:
@@ -9,6 +12,8 @@ spring:
     hikari:
       max-lifetime: 30000
     # 设置连接有效时间
+
+
 
 captcha:
   # 验证码开关

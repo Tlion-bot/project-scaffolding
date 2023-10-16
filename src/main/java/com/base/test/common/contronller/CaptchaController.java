@@ -98,6 +98,7 @@ public class CaptchaController {
 		redisCache.setCacheObject(verifyKey, code, Constants.CAPTCHA_EXPIRATION, TimeUnit.MINUTES);
 		ajax.put("uuid", uuid);
 		ajax.put("img", captcha.getImageBase64());
+		ajax.put("code", code);
 		return AjaxResult.success(ajax);
 	}
 

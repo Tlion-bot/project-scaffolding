@@ -143,7 +143,8 @@
     </select>
 
     <select id="selectUserByUserName" parameterType="String" resultMap="SysUserResult">
-        <include refid="selectUserVo"/>
+        select u.*
+        from sys_user u
         where u.user_name = #{userName} or u.phonenumber = #{userName}
     </select>
 

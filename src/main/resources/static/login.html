@@ -1,0 +1,61 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+登录
+<form onsubmit="handleSubmit(event)">
+
+    <ol>
+    <li> 用户：<input id="username" name="username" type="text"> </li>
+    <li>   密码：<input id="password" name="password" type="password"> </li>
+    <li>  验证码：<input id="captcha" name="captcha" type="text"> <img id="captcha-img" src="" onclick="refreshImage()" > </li>
+     <input type="submit" value="登录">
+    </ol>
+</form>
+
+<script>
+</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    function refreshImage() {
+        const captchaImg = document.getElementById('captcha-img');
+        var captchaImageUrl;
+        axios.get('http://localhost:8089/captchaImage')
+            .then(function (response) {
+                // 处理成功的情况
+                console.log(response.data);
+                captchaImg.src = "data:image/gif;base64," + response.data.data.img;
+            })
+            .catch(function (error) {
+                // 处理错误的情况
+                console.log(error);
+            });
+    }
+    this.refreshImage();
+</script>
+<script>
+    function handleSubmit(event) {
+        event.preventDefault(); // 阻止表单默认的提交行为
+
+        // 获取输入的用户名和密码
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // 在这里可以编写验证逻辑和登录操作
+        console.log('登录信息:', {username, password});
+
+        // 清空输入框
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+    }
+</script>
+
+</body>
+</html>
