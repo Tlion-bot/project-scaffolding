@@ -40,4 +40,6 @@ public interface SysUserMapper extends BaseMapperPlus<SysUser> {
      */
     public SysUser selectUserById(Long userId);
 
+
+    SysUser selectOneUserByUserName(String userName);
 }

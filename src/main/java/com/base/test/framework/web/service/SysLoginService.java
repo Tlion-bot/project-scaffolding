@@ -59,11 +59,11 @@ public class SysLoginService {
                 redisCache.deleteObject(verifyKey);
                 if (captcha == null) {
                     asyncService.recordLogininfor(loginBody.getUsername(), Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire"), request);
-                    throw new CustomException("");
+                    throw new CustomException("验证码已失效");
                 }
                 if (!loginBody.getCode().equalsIgnoreCase(captcha)) {
                     asyncService.recordLogininfor(loginBody.getUsername(), Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error"), request);
-                    throw new CustomException("");
+                    throw new CustomException("验证码错误");
                 }
             }
         }
@@ -79,7 +79,7 @@ public class SysLoginService {
         } catch (Exception e) {
             if (e instanceof BadCredentialsException) {
                 asyncService.recordLogininfor(loginBody.getUsername(), Constants.LOGIN_FAIL, MessageUtils.message("user.password.not.match"), request);
-                throw new CustomException("");
+                throw new CustomException("用户不存在/密码错误");
             } else if (e instanceof WrongPhoneCodeException) {
                 asyncService.recordLogininfor(loginBody.getUsername(), Constants.LOGIN_FAIL, e.getMessage(), request);
                 throw e;

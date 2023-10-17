@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form onsubmit="handleSubmit(event)" enctype="multipart/form-data">
+    <input id="files" name="files" type="file"/>
+    <input type="submit" value="提交"/>
+</form>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+
+
+    function handleSubmit(event) {
+        event.preventDefault(); // 阻止表单默认的提交行为
+        const fileInput = document.getElementById('files');
+        const file = fileInput.files[0]; // 获取选择的文件
+        const formData = new FormData();
+        formData.append('files', file); // 正确添加文件
+
+        axios.post('http://localhost:8089/common/upload',formData, {
+            headers: {
+                'Authorization':  getCookie('Admin-Token'),
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+            .then(function (response) {
+                console.log(response.data);
+                if (response.data.result==="文件上传成功") {
+                    alert("上传成功");
+
+                } else {
+                    alert("上传失败");
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+
+    function getCookie(name) {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.startsWith(name + '=')) {
+                return cookie.substring(name.length + 1);
+            }
+        }
+        return null;
+    }
+
+
+
+
+</script>
+</body>
+</html>

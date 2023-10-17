@@ -11,9 +11,17 @@ import com.base.test.common.core.mybatisplus.core.IServicePlus;
 public interface ISysUserService extends IServicePlus<SysUser> {
 
 
-
+    public boolean registerUser(SysUser user);
 
     public SysUser selectUserByUserName(String userName);
 
+    /**
+     * 校验用户名称是否唯一
+     *
+     * @return 结果
+     */
+    public String checkUserNameUnique(SysUser user);
 
+
+    public String checkPhoneUnique(SysUser user);
 }
