@@ -1,29 +1,23 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>注册</title>
 </head>
 <body>
-<h1>登录</h1>
 <form onsubmit="handleSubmit(event)">
 
     <ol>
         <li> 用户：<input id="username" name="username" type="text"></li>
         <li> 密码：<input id="password" name="password" type="password"></li>
+        <li> 昵称：<input id="nickName" name="nickName" type="text"></li>
+        <li> 电话：<input id="phonenumber" name="phonenumber" type="text"></li>
         <li> 验证码：<input id="captcha" name="captcha" type="text"> <img id="captcha-img" src="" onclick="refreshImage()">
         </li>
         <input type="submit" value="登录">
-        <a href="/register.html" value="注册">注册</a>
+        <a href="/register" value="注册"></a>
     </ol>
 </form>
-
-<script>
-</script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     var uuid;
@@ -52,20 +46,20 @@
         // 获取输入的用户名和密码
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
+        const nickName = document.getElementById('nickName').value;
+        const phonenumber = document.getElementById('phonenumber').value;
         const captcha = document.getElementById('captcha').value;
 
 
-        // 清空输入框
-        document.getElementById('username').value = '';
-        document.getElementById('password').value = '';
 
-
-        var ifLogin;
-        axios.post('http://localhost:8089/login', {
-            username: username,
+        var ifRegister;
+        axios.post('http://localhost:8089/register', {
+            userName: username,
             password: password,
             code: captcha,
-            uuid: uuid
+            uuid: uuid,
+            nickName: nickName,
+            phonenumber: phonenumber
 
         }, {
             headers: {
@@ -74,12 +68,12 @@
         })
             .then(function (response) {
                 console.log(response.data);
-                ifLogin = response.data.code;
-                console.log(ifLogin)
-                if (ifLogin===200) {
-                    alert("登录成功");
-                    setCookie("Admin-Token", response.data.data.token)
-                    window.location.href = 'http://localhost:8089/newUpload.html';
+                ifRegister = response.data.code;
+                console.log(ifRegister)
+                if (ifRegister === 200) {
+                    alert("注册成功");
+                    // setCookie("Admin-Token", response.data.data.token)
+                    window.location.href = 'http://localhost:8089/login.html';
                 } else {
                     alert(response.data.msg);
                     this.refreshImage();
@@ -92,6 +86,7 @@
 
 
     }
+
     function setCookie(name, value) {
         const expires = new Date();
         expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000)); // 设置过期时间为1天

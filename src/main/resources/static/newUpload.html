@@ -9,6 +9,34 @@
     <input id="files" name="files" type="file"/>
     <input type="submit" value="提交"/>
 </form>
+
+<input type="button"  onclick="logout()" value="退出登录"></input>
+<script>
+    function logout(){
+        const formData = new FormData();
+        axios.post('http://localhost:8089/logout', formData,{
+            headers: {
+                'Authorization':  getCookie('Admin-Token')
+            }
+        })
+            .then(function (response) {
+                console.log(response.data);
+                if (response.data.code===200) {
+                    alert("退出登录成功");
+                    window.location.href = 'http://localhost:8089/login.html';
+                    const expirationDate = new Date();
+                    expirationDate.setDate(expirationDate.getDate() - 1);
+                    document.cookie = 'Admin-Token=; expires=${expirationDate.toUTCString()}';
+
+                } else {
+                    alert("退出登录失败");
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+</script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
 
