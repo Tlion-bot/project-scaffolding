@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原神启动</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- 引入Font Awesome图标库 -->
+    <style>
+        /* 设置全屏样式 */
+        body, html {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* 设置初始背景图片 */
+        /*body {*/
+        /*    position: relative;*/
+        /*    width: 100%;*/
+        /*    height: 100%;*/
+        /*    background-image: url('https://nnc-1314424002.cos.ap-nanjing.myqcloud.com/Genshin/ys.png'); !* 设置第一个图片的路径 *!*/
+        /*    background-size: cover;*/
+        /*    background-position: center;*/
+        /*    background-repeat: no-repeat;*/
+        /*    transition: background-image 1.5s ease-in-out; !* 渐变效果 *!*/
+        /*}*/
+
+        /* 添加媒体查询以适配小屏幕（例如手机） */
+        @media (max-width: 768px) {
+            body {
+                background-size: contain; /* 适配小屏幕，保持图片完整显示 */
+                background-attachment: scroll; /* 允许滚动以查看完整图片 */
+            }
+        }
+
+        .image-container {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .image {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .image-container .image:first-child {
+            opacity: 1;
+        }
+
+
+    </style>
+</head>
+<body>
+<!-- 页面内容为空，因为我们只需要全屏展示图片 -->
+<div class="image-container">
+    <img class="image" src="https://nnc-1314424002.cos.ap-nanjing.myqcloud.com/Genshin/ys.png" alt="First image">
+    <img class="image" src="https://nnc-1314424002.cos.ap-nanjing.myqcloud.com/Genshin/qd.png?q-sign-algorithm=sha1&q-ak=AKIDBXaohw6MvYSjb6-LmPVmBAF1P2fq9VUkrw9JfIBmQNmcqVs2CQpXHC0EV8X70cfd&q-sign-time=1698807828;1698811428&q-key-time=1698807828;1698811428&q-header-list=host&q-url-param-list=ci-process&q-signature=940b525c67a129d539ae71545c8c70ecb0d7f541&x-cos-security-token=KgzH9785z3CVltWU5SmJKkXvl0BT4Sxa976b89abbff003899faa69acab431b11r6Nj7W825HUE2FeiTpHzAZI_2LmBWmugPycSooT5z7eSALdu5iaBRGRl2bT1ZhK1K75wjDebU9O_zfd64f4Am0O0H3K0d2K6XSCtpSwsEj8H8BCz44nHgS7nG3KrN_6-gBdsgsVMr5ulMqfrhb1d1nKmKf4E9jRjOeMf2xxb9y7VSd11DfQNnE7Z6zreE5z4&ci-process=originImage" alt="Second image">
+</div>
+
+
+<!--<script>-->
+
+<!--    // 检测浏览器语言-->
+<!--    var browserLanguage = navigator.language || navigator.userLanguage;-->
+
+<!--    // 检测是否是手机访问-->
+<!--    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);-->
+
+<!--    // 跳转逻辑-->
+<!--    function redirectToUrl() {-->
+<!--        if (isMobile) {-->
+<!--            // 如果是手机，尝试跳转到APP-->
+<!--            window.location.href = 'yuanshengame://';-->
+<!--        }-->
+
+<!--        if (browserLanguage !== 'zh-CN') {-->
+<!--            // 如果浏览器语言不是简体中文，跳转到https://genshin.hoyoverse.com/-->
+<!--            window.location.href = 'https://genshin.hoyoverse.com/';-->
+<!--        } else {-->
+<!--            // 否则，跳转到https://ys.mihoyo.com/-->
+<!--            window.location.href = 'https://ys.mihoyo.com/';-->
+<!--        }-->
+<!--    }-->
+
+<!--    // 5秒后进行跳转-->
+<!--    setTimeout(redirectToUrl, 5000);-->
+
+<!--    // 在页面加载后切换背景图片-->
+<!--    window.addEventListener('load', function() {-->
+<!--        setTimeout(function() {-->
+<!--            document.body.style.backgroundImage = "url('https://nnc-1314424002.cos.ap-nanjing.myqcloud.com/Genshin/qd.png?q-sign-algorithm=sha1&q-ak=AKIDLCtdYdTv9lSRrKh0Jf-6Q0yJ0Ta2uqHIeBLy-wPddlLy7O37Bn5gO3lfC3FnXnO8&q-sign-time=1698806044;1698809644&q-key-time=1698806044;1698809644&q-header-list=host&q-url-param-list=ci-process&q-signature=1c6742bc740e05c2de0935504d8c4468838a1ddc&x-cos-security-token=q9AL6au90hTL9VrtENXYc1xlyYkhXoqaa534875b3b6c644cd8679f775400d894ZPBgy2GoSVQV9AaAcWSvOuB_7ZFevCFNLhxJ9888nVzLj20gv9Xr5qVxh5ssEoh3yXEZWZhtMan3S0vW1CT9bYppP9MbekOyTjqVQ_4X9IWuJ_qVzNEwv-WFX6BBKS7PVuM_aqoDCMTOuf4pBCEl16FFQO3P_uFBbc8QdlEMoqBoRARxtzf0XELEPb2_NMxx&ci-process=originImage')";-->
+<!--        }, 3000);-->
+<!--    });-->
+<!--</script>-->
+</body>
+</html>

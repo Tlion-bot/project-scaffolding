@@ -6,15 +6,24 @@ public class Test {
 
 
     public static void main(String[] args) {
-       int x=5;int num,num1;
-        num=++x*--x;
-        num1=x++*x--;
-        System.out.println(num);
-        System.out.println(num1);
+        Condition condition=new Condition(1,">","60");
+        Condition condition1=new Condition(2,"<","30");
+        Condition condition3=new Condition(3,">","0");
+
+
     }
     @Data
-    static class Cat{
-        int age;
-        String name;
+    static class Condition{
+       private int id;
+       private String condition_operator;
+       private String condition_value;
+
+        public Condition(int id, String condition_operator, String condition_value) {
+            this.id = id;
+            this.condition_operator = condition_operator;
+            this.condition_value = condition_value;
+        }
     }
+
+
 }

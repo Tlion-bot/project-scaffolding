@@ -16,6 +16,10 @@ import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -82,5 +86,23 @@ public class RedisConfig extends CachingConfigurerSupport {
 		config.put("redissonCacheMap", new CacheConfig(30*60*1000, 10*60*1000));
 		return new RedissonSpringCacheManager(redissonClient, config, JsonJacksonCodec.INSTANCE);
 	}
+	@Bean
+	public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
+		// 创建 RedisTemplate 对象
+		RedisTemplate<String, Object> template = new RedisTemplate<>();
+		// 设置连接工厂
+		template.setConnectionFactory(connectionFactory);
+		// 创建 JSON 序列化工具
+		GenericJackson2JsonRedisSerializer jsonRedisSerializer = new GenericJackson2JsonRedisSerializer();
+		// 设置 key 的序列化
+		template.setKeySerializer(RedisSerializer.string());
+		template.setHashKeySerializer(RedisSerializer.string());
+		// 设置 value 的序列化
+		template.setValueSerializer(jsonRedisSerializer);
+		template.setHashValueSerializer(jsonRedisSerializer);
+		// 返回
+		return template;
+	}
+
 
 }

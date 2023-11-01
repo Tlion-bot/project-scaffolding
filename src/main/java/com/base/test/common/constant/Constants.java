@@ -205,4 +205,8 @@ public class Constants {
     public static final String MESSAGE_USERNAME = "用户名只能使用数字、字母、下划线，长度为2至25位";
     public static final String REGEX_PHONE_CODE = "\\d{4,6}";
     public static final String MESSAGE_PHONE_CODE = "验证码格式错误";
+
+    public static final  double positiveInfinity = Double.POSITIVE_INFINITY; //正无穷大
+    public static final  double negativeInfinity = Double.NEGATIVE_INFINITY; //负无穷大
+    public static final int EMAIL_EXPIRED_TIME=10;
 }

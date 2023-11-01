@@ -31,4 +31,6 @@ public interface CacheConstant {
 	String LOCK_GAI = "lock_gai_";
 
 	Duration TRY_LOCK_TIME = Duration.ofSeconds(10L);
+
+
 }

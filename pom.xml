@@ -40,6 +40,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
+        <!-- websocket -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+        <!--fastjson-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -142,6 +153,8 @@
             <artifactId>core</artifactId>
             <version>3.3.3</version>
         </dependency>
+
+
         <dependency>
             <groupId>com.google.zxing</groupId>
             <artifactId>javase</artifactId>
@@ -202,9 +215,21 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
+        <filters> <!-- 指定使用的 filter 启用 application-${profileActive}.properties-->
+            <filter>application-${profileActive}.properties</filter>
+        </filters>
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -258,11 +283,16 @@
     </build>
     <profiles>
         <profile>
+            <!-- 本地开发环境 -->
             <id>dev</id>
             <properties>
                 <profileActive>dev</profileActive>
             </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
         </profile>
+
     </profiles>
 
 </project>
