@@ -20,5 +20,8 @@ public interface UserService extends IService<User> {
 	void delete(Long[] ids);
 
 	List<User> exportList();
+
+	void synchronization();
+
 }
 

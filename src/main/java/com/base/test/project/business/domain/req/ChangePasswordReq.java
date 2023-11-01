@@ -7,9 +7,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 /**
- * @Author lzs
- * @Date 2023/9/13 9:16
- **/
+ * @author nnc
+ * @date 2023/11/1 16:10
+ */
 @Data
 public class ChangePasswordReq {
     @Pattern(regexp = Constants.REGEX_PASSWORD, message = Constants.MESSAGE_PASSWORD)

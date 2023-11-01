@@ -34,12 +34,12 @@ public class EmailServiceImpl implements EmailService {
         // 设置模板中的变量（分割验证码）
         context.setVariable("verifyCode", Arrays.asList(verifyCode.split("")));
         // 第一个参数为模板的名称(html不用写全路径)
-        String process = templateEngine.process("GenshinImpactStarts.html", context); // 这里不用写全路径
+        String process = templateEngine.process("EmailVerificationCode.html", context); // 这里不用写全路径
         // String process = templateEngine.process("EmailVerificationCode.html", context); // 这里不用写全路径
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-            helper.setSubject("【原神启动】"); // 邮件的标题
+            helper.setSubject("【登录】"); // 邮件的标题
             helper.setFrom(username); // 发送者
             helper.setTo(email); // 接收者
             helper.setSentDate(new Date()); // 时间

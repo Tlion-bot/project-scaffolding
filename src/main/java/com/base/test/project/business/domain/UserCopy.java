@@ -54,5 +54,19 @@ public class UserCopy implements Serializable {
 	 */
 	@TableField
 	private String t;
+
+	/**
+	 *操作类型
+	 */
+	@TableField
+	private int actionType;
+
+
+	/**
+	 *原用户id
+	 */
+	@TableField
+	private Long userId;
+
 }
 

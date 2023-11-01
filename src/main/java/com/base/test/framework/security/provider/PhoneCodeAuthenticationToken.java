@@ -6,9 +6,9 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 
 /**
- * @Author lzs
- * @Date 2022/4/29 10:50
- **/
+ * @author nnc
+ * @date 2023/11/1 16:10
+ */
 public class PhoneCodeAuthenticationToken extends AbstractAuthenticationToken {
 
     private Object principal;

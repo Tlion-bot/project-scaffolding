@@ -3,9 +3,9 @@ package com.base.test.framework.security.provider;
 import org.springframework.security.core.AuthenticationException;
 
 /**
- * @Author lzs
- * @Date 2022/5/5 17:15
- **/
+ * @author nnc
+ * @date 2023/11/1 16:09
+ */
 public class WrongPhoneCodeException extends AuthenticationException {
     public WrongPhoneCodeException(String msg, Throwable cause) {
         super(msg, cause);

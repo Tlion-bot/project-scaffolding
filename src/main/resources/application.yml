@@ -1,8 +1,6 @@
 upload:
   path: @profilePath@
-mail:
-  fromMail:
-    fromAddress: @fromAddress@
+
 
   # 全局线程池相关配置
 thread-pool:
