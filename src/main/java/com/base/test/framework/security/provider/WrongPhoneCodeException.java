@@ -4,7 +4,7 @@ import org.springframework.security.core.AuthenticationException;
 
 /**
  * @author nnc
- * @date 2023/11/1 16:09
+ * @date 2023/11/1 9:33
  */
 public class WrongPhoneCodeException extends AuthenticationException {
     public WrongPhoneCodeException(String msg, Throwable cause) {
