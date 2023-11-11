@@ -32,6 +32,7 @@ public interface SysUserMapper extends BaseMapperPlus<SysUser> {
      */
     public SysUser selectUserByUserName(String userName);
 
+    public SysUser selectUserByEmail(String email);
     /**
      * 通过用户ID查询用户
      *

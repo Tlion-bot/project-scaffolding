@@ -6,12 +6,12 @@ import org.springframework.security.core.AuthenticationException;
  * @author nnc
  * @date 2023/11/1 9:33
  */
-public class WrongPhoneCodeException extends AuthenticationException {
-    public WrongPhoneCodeException(String msg, Throwable cause) {
+public class WrongEmailCodeException extends AuthenticationException {
+    public WrongEmailCodeException(String msg, Throwable cause) {
         super(msg, cause);
     }
 
-    public WrongPhoneCodeException(String msg) {
+    public WrongEmailCodeException(String msg) {
         super(msg);
     }
 }

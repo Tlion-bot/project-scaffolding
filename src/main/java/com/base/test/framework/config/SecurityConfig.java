@@ -1,10 +1,15 @@
 package com.base.test.framework.config;
 
+import com.base.test.common.core.redis.RedisCache;
 import com.base.test.framework.security.filter.JwtAuthenticationTokenFilter;
 import com.base.test.framework.security.handle.AuthenticationEntryPointImpl;
 import com.base.test.framework.security.handle.LogoutSuccessHandlerImpl;
+import com.base.test.framework.security.provider.EmailCodeAuthenticationProvider;
+import com.base.test.project.system.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,6 +19,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.filter.CorsFilter;
@@ -54,6 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Autowired
     private CorsFilter corsFilter;
+
+
 
     /**
      * 解决 无法直接注入 AuthenticationManager
@@ -96,7 +104,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 过滤请求
                 .authorizeRequests()
                 // 对于登录login 验证码captchaImage 允许匿名访问
-                .antMatchers("/login", "/register", "/captchaImage").anonymous()
+                .antMatchers("/login", "/register", "/captchaImage","/loginByeMail").anonymous()
                 .antMatchers(
                         HttpMethod.GET,
                         "/*.html",
@@ -120,14 +128,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/web/banner/*").permitAll()
                 .antMatchers("/web/policy/*").permitAll()
                 .antMatchers("/user/*").permitAll()
-
+                .antMatchers("/email/*").permitAll()
 
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated()
                 .and()
                 .headers().frameOptions().disable();
         httpSecurity.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
-        // httpSecurity.authenticationProvider(phoneCodeAuthenticationProvider);
+        httpSecurity.authenticationProvider(emailCodeAuthenticationProvider);
         // 添加JWT filter
         httpSecurity.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         // 添加CORS filter
@@ -147,19 +155,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    // @Lazy
-    // private PhoneCodeAuthenticationProvider phoneCodeAuthenticationProvider;
+    @Lazy
+    private EmailCodeAuthenticationProvider emailCodeAuthenticationProvider;
 
-    // @Bean
-    // public PhoneCodeAuthenticationProvider phoneCodeAuthenticationProvider(ISysUserService userService, @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService,
-    //                                                                        PasswordEncoder passwordEncoder, RedisCache redisCache) {
-    //     PhoneCodeAuthenticationProvider provider = new PhoneCodeAuthenticationProvider();
-    //     provider.setUserService(userService);
-    //     provider.setUserDetailsService(userDetailsService);
-    //     provider.setPasswordEncoder(passwordEncoder);
-    //     provider.setRedisCache(redisCache);
-    //     return provider;
-    // }
+    @Bean
+    public EmailCodeAuthenticationProvider EmailCodeAuthenticationProvider(ISysUserService userService, @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService,
+                                                                           PasswordEncoder passwordEncoder, RedisCache redisCache) {
+        EmailCodeAuthenticationProvider provider = new EmailCodeAuthenticationProvider();
+        provider.setUserService(userService);
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder);
+        provider.setRedisCache(redisCache);
+        return provider;
+    }
 
     /**
      * 身份认证接口

@@ -17,7 +17,7 @@ public class User implements Serializable {
 	/**
 	 * 
 	 */
-	@TableId(type = IdType.ASSIGN_ID)
+	@TableId(type = IdType.AUTO)
 	private Long id;
 	/**
 	 * 
@@ -61,5 +61,15 @@ public class User implements Serializable {
 	 */
 	@TableField
 	private String t;
+
+	public boolean isAdmin()
+	{
+	    return isAdmin(this.id);
+	}
+
+	public static boolean isAdmin(Long userId)
+	{
+	    return userId != null && 1L == userId;
+	}
 }
 

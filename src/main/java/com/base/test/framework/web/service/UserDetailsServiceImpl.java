@@ -53,6 +53,31 @@ public class UserDetailsServiceImpl implements UserDetailsService
         return createLoginUser(user);
     }
 
+
+    public UserDetails loadUserByEmail(String email) throws UsernameNotFoundException
+    {
+        SysUser user = userService.selectUserByEmail(email);
+        if (Validator.isNull(user))
+        {
+            log.info("登录用户：{} 不存在.", email);
+            throw new UsernameNotFoundException("登录用户：" + email + " 不存在");
+        }
+        else if (UserStatus.DELETED.getCode().equals(user.getDelFlag()))
+        {
+            log.info("登录用户：{} 已被删除.", email);
+            throw new BaseException("对不起，您的账号：" + email + " 已被删除");
+        }
+        else if (UserStatus.DISABLE.getCode().equals(user.getStatus()))
+        {
+            log.info("登录用户：{} 已被停用.", email);
+            throw new BaseException("对不起，您的账号：" + email + " 已停用");
+        }
+
+        return createLoginUser(user);
+    }
+
+
+
     public UserDetails createLoginUser(SysUser user)
     {
         return new LoginUser(user);

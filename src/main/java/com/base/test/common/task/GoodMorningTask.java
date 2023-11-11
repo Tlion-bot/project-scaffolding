@@ -9,6 +9,7 @@ import com.base.test.common.domain.vo.WechatTemplateVo;
 import com.base.test.common.service.WeiXinService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
@@ -40,7 +41,7 @@ public class GoodMorningTask {
      * 微信模板消息推送
      * @throws ParseException
      */
-    // @Scheduled(cron="0 0 7 * * ? ")
+    @Scheduled(cron="0 0 8 * * ? ")
     public void sendTemplateMsg() throws ParseException {
         //配置及数据
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");

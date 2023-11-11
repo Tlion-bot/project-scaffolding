@@ -2,6 +2,7 @@ package com.base.test.project.business.controller.manager;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.base.test.common.core.domain.AjaxResult;
+import com.base.test.common.core.redis.RedisCache;
 import com.base.test.common.util.ExcelUtil;
 import com.base.test.project.business.domain.User;
 import com.base.test.project.business.service.UserService;
@@ -16,6 +17,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,6 +41,8 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
+	@Autowired
+	private RedisCache redisCache;
 	private final UserService userService;
 
 	/**
@@ -69,6 +74,28 @@ public class UserController {
 		user.setName(username);
 		user.setPassword(password);
 		userService.save(user);
+		return AjaxResult.success();
+	}
+	/**
+	 * 新增
+	 */
+	@GetMapping("addList")
+	public AjaxResult addList(@RequestParam int number) {
+
+		List<User> userList=new ArrayList<>();
+		for (int i = 0; i<number; i++){
+			User user=new User();
+			user.setName("a");
+			user.setPassword("b");
+			redisCache.setCacheObject("user", user);
+
+			System.out.println(user);
+			User user1=redisCache.getCacheObject("user");
+			System.out.println(user1);
+			userList.add(user);
+
+		}
+		   userService.saveBatch(userList);
 		return AjaxResult.success();
 	}
 

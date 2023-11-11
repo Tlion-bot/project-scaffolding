@@ -9,18 +9,18 @@ import java.util.Collection;
  * @author nnc
  * @date 2023/11/1 9:33
  */
-public class PhoneCodeAuthenticationToken extends AbstractAuthenticationToken {
+public class EmailCodeAuthenticationToken extends AbstractAuthenticationToken {
 
     private Object principal;
     private Object credentials;
 
-    public PhoneCodeAuthenticationToken(Object principal, Object credentials) {
+    public EmailCodeAuthenticationToken(Object principal, Object credentials) {
         super(null);
         this.principal = principal;
         this.credentials = credentials;
     }
 
-    public PhoneCodeAuthenticationToken(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities) {
+    public EmailCodeAuthenticationToken(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         this.principal = principal;
         this.credentials = credentials;

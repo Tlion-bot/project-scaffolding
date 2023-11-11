@@ -1,11 +1,11 @@
 package com.base.test.framework.config.properties;
 
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.redisson.config.TransportMode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-
 /**
  * Redisson 配置属性
  *

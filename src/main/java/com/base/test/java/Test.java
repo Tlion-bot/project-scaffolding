@@ -2,14 +2,19 @@ package com.base.test.java;
 
 import lombok.Data;
 
+import java.math.BigInteger;
+
 public class Test {
 
 
     public static void main(String[] args) {
-        Condition condition=new Condition(1,">","60");
-        Condition condition1=new Condition(2,"<","30");
-        Condition condition3=new Condition(3,">","0");
 
+        int a=2^2;
+        Long i= (long)Math.pow(2,67);
+        BigInteger j= new BigInteger("9223372036854775808");
+        System.out.println(i);
+        System.out.println(j);
+        System.out.println(a);
 
     }
     @Data
@@ -24,6 +29,7 @@ public class Test {
             this.condition_value = condition_value;
         }
     }
+
 
 
 }

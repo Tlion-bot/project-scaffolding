@@ -1,4 +1,4 @@
-package com.base.test.common.util;
+package com.base.test.common.utils;
 
 import cn.hutool.core.lang.Validator;
 import cn.hutool.core.util.ArrayUtil;
@@ -6,8 +6,6 @@ import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -98,14 +96,6 @@ public class JsonUtils {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static String toJson(Object obj) {
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .disableHtmlEscaping()
-                .create();
-        return gson.toJson(obj);
     }
 
 }

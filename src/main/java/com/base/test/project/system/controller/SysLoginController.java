@@ -52,6 +52,21 @@ public class SysLoginController {
         ajax.put(Constants.TOKEN, token);
         return AjaxResult.success(ajax);
     }
+    /**
+     * 登录方法
+     *
+     * @param loginBody 登录信息
+     * @return 结果
+     */
+    @PostMapping("/loginByeMail")
+    public AjaxResult loginByeMail(@RequestBody LoginBody loginBody, @RequestHeader Integer client) {
+        loginBody.setClient(client);
+        Map<String, Object> ajax = new HashMap<>();
+        // 生成令牌
+        String token = loginService.loginByEmail(loginBody);
+        ajax.put(Constants.TOKEN, token);
+        return AjaxResult.success(ajax);
+    }
 
     /**
      * 获取用户信息

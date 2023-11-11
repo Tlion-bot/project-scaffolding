@@ -5,7 +5,7 @@ import cn.hutool.http.HttpStatus;
 import com.base.test.common.constant.Constants;
 import com.base.test.common.core.domain.AjaxResult;
 import com.base.test.common.core.domain.model.LoginUser;
-import com.base.test.common.util.JsonUtils;
+import com.base.test.common.utils.JsonUtils;
 import com.base.test.common.utils.ServletUtils;
 import com.base.test.framework.web.service.AsyncService;
 import com.base.test.framework.web.service.TokenService;

@@ -3,7 +3,7 @@ package com.base.test.framework.security.handle;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpStatus;
 import com.base.test.common.core.domain.AjaxResult;
-import com.base.test.common.util.JsonUtils;
+import com.base.test.common.utils.JsonUtils;
 import com.base.test.common.utils.ServletUtils;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

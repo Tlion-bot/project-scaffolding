@@ -72,13 +72,11 @@ class TemplateApplicationTests {
             //天气
             map.put("weather",new WechatTemplateVo(weatherInfo.getWeather(),"#CD96CD"));
             //最低气温
-            map.put("lowest",new WechatTemplateVo(weatherInfo.getLowest(),"#A4D3EE"));
+            map.put("min_temperature",new WechatTemplateVo(weatherInfo.getLowest(),"#A4D3EE"));
             //最高气温
-            map.put("highest",new WechatTemplateVo(weatherInfo.getHighest(),"#CD3333"));
-            //降水量
-            map.put("pcpn",new WechatTemplateVo(weatherInfo.getPcpn()+"%","#A4D3EE"));
+            map.put("max_temperature",new WechatTemplateVo(weatherInfo.getHighest(),"#CD3333"));
             //今日建议
-            map.put("tips",new WechatTemplateVo(weatherInfo.getTips(),"#FF7F24"));
+            map.put("morning",new WechatTemplateVo(weatherInfo.getTips(),"#FF7F24"));
             //相爱天数
             long loveDays = fun2(loveDay);
             map.put("loveDay",new WechatTemplateVo(loveDays+"","#EE6AA7"));
@@ -90,11 +88,17 @@ class TemplateApplicationTests {
             map.put("babyBirthday",new WechatTemplateVo(babyDay+"","#EE6AA7"));
             //彩虹屁
             String caiHongPiInfo = weiXinService.getCaiHongPiInfo(appKey);
-            map.put("pipi",new WechatTemplateVo(caiHongPiInfo,"#E066FF"));
+            map.put("caihongpi",new WechatTemplateVo(caiHongPiInfo,"#E066FF"));
 
             sendMsgVo.setData(map);
             JSONObject entries = weiXinService.sendMsg(sendMsgVo,token, openId);
         }
+    }
+
+    @Test
+    void  getProperty(){
+        String userName=System.getProperty("user.name");
+        System.out.println(userName);
     }
 
     // @Test

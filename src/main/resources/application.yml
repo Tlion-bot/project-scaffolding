@@ -149,12 +149,67 @@ spring:
   profiles:
     active: @profileActive@
   datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url:  @druid.master.url@
-    username: @druid.master.username@
-    password: @druid.master.password@
-    hikari:
-      max-lifetime: 30000
+    type: com.alibaba.druid.pool.DruidDataSource
+  # 动态数据源文档 https://www.kancloud.cn/tracy5546/dynamic-datasource/content
+    dynamic:
+      #设置默认的数据源或者数据源组,默认值即为 master
+      primary: master
+      datasource:
+        # 主库数据源
+        master:
+          driverClassName: com.mysql.cj.jdbc.Driver
+          url: @druid.master.url@
+          username: @druid.master.username@
+          password: @druid.master.password@
+        # 从库数据源
+        slave:
+          driverClassName: com.mysql.cj.jdbc.Driver
+          url:
+          username:
+          password:
+  druid:
+    # 初始连接数
+    initialSize: 5
+    # 最小连接池数量
+    minIdle: 10
+    # 最大连接池数量
+    maxActive: 20
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    # 配置一个连接在池中最大生存的时间，单位是毫秒
+    maxEvictableIdleTimeMillis: 900000
+    # 配置检测连接是否有效
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    # 注意这个值和druid原生不一致，默认启动了stat
+    filters: stat
+    webStatFilter:
+      enabled: true
+    statViewServlet:
+      enabled: true
+      # 设置白名单，不填则允许所有访问
+      allow:
+      url-pattern: /druid/*
+      # 控制台管理用户名和密码
+      login-username: druid
+      login-password: 123456
+    filter:
+      stat:
+        enabled: true
+        # 慢SQL记录
+        log-slow-sql: true
+        slow-sql-millis: 1000
+        merge-sql: true
+      wall:
+        config:
+          multi-statement-allow: true
+
     # 设置连接有效时间
 
     undertow:
@@ -168,24 +223,6 @@ spring:
         prefix: access_log
         suffix: .log
   #  jackson
-  jackson:
-    #日期格式化
-    date-format: yyyy-MM-dd HH:mm:ss
-    serialization:
-      #格式化输出
-      indent_output: true
-      #忽略无法转换的对象
-      fail_on_empty_beans: false
-    #设置空如何序列化
-    defaultPropertyInclusion: NON_EMPTY
-    deserialization:
-      #允许对象忽略json中不存在的属性
-      fail_on_unknown_properties: false
-    parser:
-      #允许出现特殊字符和转义符
-      allow_unquoted_control_chars: true
-      #允许出现单引号
-      allow_single_quotes: true
 
   redis:
     # 地址
@@ -207,8 +244,7 @@ spring:
     username: @mail.username@ # 发件人邮箱
     password: @mail.password@ # 邮箱授权码
     default-encoding: UTF-8
-
-
-
-
+  jackson:
+    # 日期格式化
+    date-format: yyyy-MM-dd HH:mm:ss
 

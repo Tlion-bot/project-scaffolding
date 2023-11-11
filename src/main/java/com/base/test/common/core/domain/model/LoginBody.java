@@ -44,4 +44,13 @@ public class LoginBody
      * 登录客户端：0-管理后台,1-web,2-App
      */
     private Integer client;
+    /**
+     * 邮箱验证码
+     */
+    private String emailVerificationCode;
+    /**
+     * 邮箱
+     */
+    private String email;
+
 }

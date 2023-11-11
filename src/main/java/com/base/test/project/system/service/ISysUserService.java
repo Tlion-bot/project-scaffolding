@@ -15,6 +15,8 @@ public interface ISysUserService extends IServicePlus<SysUser> {
 
     public SysUser selectUserByUserName(String userName);
 
+    public SysUser selectUserByEmail(String email);
+
     /**
      * 校验用户名称是否唯一
      *
