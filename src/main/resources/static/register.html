@@ -12,6 +12,7 @@
         <li> 密码：<input id="password" name="password" type="password"></li>
         <li> 昵称：<input id="nickName" name="nickName" type="text"></li>
         <li> 电话：<input id="phonenumber" name="phonenumber" type="text"></li>
+        <li> 电话：<input id="email" name="email" type="email"></li>
         <li> 验证码：<input id="captcha" name="captcha" type="text"> <img id="captcha-img" src="" onclick="refreshImage()">
         </li>
         <input type="submit" value="登录">
@@ -48,6 +49,7 @@
         const password = document.getElementById('password').value;
         const nickName = document.getElementById('nickName').value;
         const phonenumber = document.getElementById('phonenumber').value;
+        const email = document.getElementById('email').value;
         const captcha = document.getElementById('captcha').value;
 
 
@@ -59,7 +61,8 @@
             code: captcha,
             uuid: uuid,
             nickName: nickName,
-            phonenumber: phonenumber
+            phonenumber: phonenumber,
+            email:email
 
         }, {
             headers: {

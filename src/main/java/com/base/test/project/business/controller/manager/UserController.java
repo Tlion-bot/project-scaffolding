@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.base.test.common.core.domain.AjaxResult;
 import com.base.test.common.core.redis.RedisCache;
 import com.base.test.common.util.ExcelUtil;
+import com.base.test.feignclient.UserFeignClient;
 import com.base.test.project.business.domain.User;
 import com.base.test.project.business.service.UserService;
+import com.base.test.project.business.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
@@ -43,7 +45,11 @@ public class UserController {
 
 	@Autowired
 	private RedisCache redisCache;
+	@Autowired
+	private UserServiceImpl userServiceImpl;
 	private final UserService userService;
+
+	private final UserFeignClient userFeignClient;
 
 	/**
 	 * 分页列表
@@ -54,7 +60,8 @@ public class UserController {
 		//  Page<User> page = new Page<User>(); User user=null;
 		//  page.setSize(1);
 		//  page.setTotal(10);
-		return AjaxResult.success(userService.pageList(page,user));
+		Page<User> userPage=userService.pageList(page,user);
+		return AjaxResult.success(userPage);
 	}
 
 	/**
@@ -209,6 +216,17 @@ public class UserController {
 	}
 
 
+	/**
+	 * 分页列表
+	 */
+	@PostMapping("feignPageList")
+	public AjaxResult<AjaxResult<Page<User>>> feignPageList(@RequestBody Page<User> page,@RequestBody User user) {
+		// public AjaxResult<Page<User>> pageList() {
+		//  Page<User> page = new Page<User>(); User user=null;
+		//  page.setSize(1);
+		//  page.setTotal(10);
+		return AjaxResult.success(userServiceImpl.feignPageList(page,user));
+	}
 
 }
 

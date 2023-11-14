@@ -139,7 +139,8 @@ token:
   # 令牌有效期（默认30分钟）
   expireTime: 30
 
-
+feign:
+  url: @feign.url@
 
 
 spring:
