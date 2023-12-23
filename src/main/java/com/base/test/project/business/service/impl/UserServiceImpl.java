@@ -114,10 +114,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 userCopy.setUserId(user.getId());
                 userCopyService.save(userCopy);
             } else {
-                UserCopy userCopy = userCopyService.getOne(Wrappers.lambdaQuery(UserCopy.class)
-                        .eq(UserCopy::getUserId, user.getId()));
+                UserCopy userCopy = userCopyService.getOne(Wrappers.lambdaQuery(UserCopy.class).eq(UserCopy::getUserId, user.getId()));
                 userCopy.setActionType(actionType.code);
                 userCopyService.updateById(userCopy);
+                this.list();
             }
         }
 
@@ -126,7 +126,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public AjaxResult<Page<User>> feignPageList(Page<User> page, User user) {
 
 
-        PageUser pageUser=new PageUser();
+        PageUser pageUser = new PageUser();
         pageUser.setSize(page.getSize());
         pageUser.setTotal(page.getTotal());
         pageUser.setName(user.getName());

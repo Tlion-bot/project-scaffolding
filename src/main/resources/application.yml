@@ -142,6 +142,18 @@ token:
 feign:
   url: @feign.url@
 
+elasticsearch:
+  address: @es.address@
+  connectTimeout: 5000
+  socketTimeout: 5000
+  connectionRequestTimeout: 5000
+  maxConnectNum: 100
+  maxConnectPerRoute: 100
+  schema: http
+
+  username: @es.username@
+  password: @es.password@
+
 
 spring:
   messages:

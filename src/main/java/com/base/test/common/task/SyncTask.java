@@ -17,9 +17,9 @@ import org.springframework.stereotype.Component;
 public class SyncTask {
     @Autowired
     UserServiceImpl userService;
-    @Scheduled(cron="0 0 2 * * ? ")
+     @Scheduled(cron="0 0 2 * * ? ")
     // @Scheduled(fixedDelay = 60*60*1000)
-    // @Scheduled(fixedDelay = 10*1000)
+   // @Scheduled(fixedDelay = 50*1000)
     public void run() {
         userService.synchronization();
     }
