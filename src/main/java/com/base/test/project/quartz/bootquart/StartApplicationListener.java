@@ -1,3 +1,4 @@
+/*
 package com.base.test.project.quartz.bootquart;
 
 import org.quartz.JobBuilder;
@@ -28,7 +29,7 @@ public class StartApplicationListener implements ApplicationListener<ContextRefr
                 trigger = TriggerBuilder.newTrigger()
                         .withIdentity(triggerKey)
 
-                        // .withSchedule(CronScheduleBuilder.cronSchedule("*/10 * * * * ?"))
+                        // .withSchedule(CronScheduleBuilder.cronSchedule())
                         .build();
                 JobDetail jobDetail = JobBuilder
                         .newJob(QuartzJob.class)
@@ -39,10 +40,11 @@ public class StartApplicationListener implements ApplicationListener<ContextRefr
 
 
                 scheduler.scheduleJob(jobDetail,trigger);
-                scheduler.start();
+               scheduler.start();
             }
         } catch (SchedulerException e) {
             e.printStackTrace();
         }
     }
 }
+*/
