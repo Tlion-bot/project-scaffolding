@@ -171,6 +171,27 @@ elasticsearch:
   username: @es.username@
   password: @es.password@
 
+#xxl-job
+xxl:
+  job:
+    admin:
+      addresses: http://127.0.0.1:9090/xxl-job-admin
+      #addresses: http://4.216.34.103:9090/xxl-job-admin
+
+
+    executor:
+      address: http://127.0.0.1:9999
+      appname: xxl-job-executor-sample
+      ip: 127.0.0.1
+      port: 9999
+      logpath: /data/applogs/xxl-job/xxx
+      logretentiondays: -1
+    accessToken: default_token
+
+
+
+
+
 
 spring:
 
