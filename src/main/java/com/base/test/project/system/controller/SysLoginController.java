@@ -53,7 +53,7 @@ public class SysLoginController {
         return AjaxResult.success(ajax);
     }
     /**
-     * 登录方法
+     * 邮箱登录方法
      *
      * @param loginBody 登录信息
      * @return 结果

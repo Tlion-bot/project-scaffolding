@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArraySet;
-
+import java.util.stream.Collectors;
 
 
 /**
@@ -144,7 +144,7 @@ public class MyWebScoket {
                 // 存储聊天记录  已读  存进聊天记录表
                // UserService.instUser(user.getUid(), Integer.parseInt(socketEntity.getToUser()),jsonObject.get("message").toString(),jsonObject.get("type").toString(),1);
 
-                fromsession.getAsyncRemote().sendText(name + ":" + socketEntity.getMessage());//发送消息
+                fromsession.getAsyncRemote().sendText(name+"(本人)" + ":" + socketEntity.getMessage());//发送消息
                 tosession.getAsyncRemote().sendText(name + ":" + socketEntity.getMessage());//发送消息
             } else {
                 // 存储聊天记录  未读  存进聊天记录表
@@ -166,10 +166,14 @@ public class MyWebScoket {
      * @param socketEntity
      */
     private void broadcast(SocketEntity socketEntity, String name) {
-        for (MyWebScoket myWebScoket : webScoketset) {
+        CopyOnWriteArraySet<MyWebScoket> newSet = webScoketset.stream()
+                .filter(ws -> !ws.equals(this))
+                .collect(Collectors.toCollection(CopyOnWriteArraySet::new));
+        for (MyWebScoket myWebScoket : newSet) {
             //发送消息
             myWebScoket.session.getAsyncRemote().sendText(name + ":" + socketEntity.getMessage());
         }
+        this.session.getAsyncRemote().sendText(name +"(本人)"+ ":" + socketEntity.getMessage());
     }
     /**
      * 上线通知
