@@ -17,6 +17,7 @@ public interface ISysUserService extends IServicePlus<SysUser> {
 
     public SysUser selectUserByEmail(String email);
 
+    public SysUser selectUserByUserId(Long userid);
     /**
      * 校验用户名称是否唯一
      *

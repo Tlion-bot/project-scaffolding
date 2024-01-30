@@ -36,6 +36,11 @@ public class SysUserServiceImpl extends ServicePlusImpl<SysUserMapper, SysUser> 
         return baseMapper.selectUserByEmail(email);
     }
 
+    @Override
+    public SysUser selectUserByUserId(Long userid) {
+        return baseMapper.selectUserById(userid);
+    }
+
     /**
      * 校验用户名称是否唯一
      *

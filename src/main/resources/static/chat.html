@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>聊天室</title>
+    <style type="text/css">
+        #message{
+            margin-top: 20px;
+            padding-left: 20px;
+            border: 1px solid;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js"></script>
+    <script type="text/javascript">
+        //连接对象
+        var websocket = null;
+        var name ;
+        var userId;
+
+
+
+        //获取cookie
+        function getCookie(cname) {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.startsWith(cname + '=')) {
+                    console.log(cookie.substring(cname.length + 1))
+                    return cookie.substring(cname.length + 1);
+                }
+            }
+            return null;
+        }
+
+        function getInfo() {
+            return new Promise((resolve, reject) => {
+                axios.get('http://localhost:8089/getInfo', {
+                    headers: {
+                        'Authorization': getCookie('Admin-Token')
+                    }
+                })
+                    .then(function (response) {
+                        console.log(response.data);
+                        if (response.data.code === 200) {
+                            userId = response.data.data.user.userId;
+                            name = response.data.data.user.userName;
+                            console.log(name);
+                            resolve(); // Resolve the promise when getInfo is successful
+                        } else {
+                            alert("请先登录");
+                            window.location.href = 'http://localhost:8089/login.html';
+                            const expirationDate = new Date();
+                            expirationDate.setDate(expirationDate.getDate() - 1);
+                            document.cookie = 'Admin-Token=; expires=${expirationDate.toUTCString()}';
+                            reject(new Error("Login required")); // Reject the promise when login is required
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        reject(error); // Reject the promise in case of an error
+                    });
+            });
+        }
+
+        //建立连接
+        function connectWebsocket(event) {
+            event.preventDefault();
+
+            document.getElementById("btn1").disabled = true;
+
+            //先判断浏览器是否支持webscoket
+            if ("WebSocket" in window) {
+                getInfo()
+                    .then(() => {
+                        // Create WebSocket connection only after getInfo is successful
+                        websocket = new WebSocket("ws://localhost:8089/websocket/" + userId);
+                        // Rest of your WebSocket code
+                        websocket.onopen = function (event) {
+                            setMessage("提示：连接成功");
+                        }
+                        websocket.onclose = function (event) {
+                            setMessage("提示：连接关闭");
+                        }
+                        websocket.onmessage = function (event) {
+                            setMessage(event.data);
+                        }
+                        websocket.onerror = function (event) {
+                            setMessage("提示：连接异常");
+                        }
+                    })
+                    .catch(error => {
+                        // Handle error from getInfo
+                        console.error(error);
+                    });
+            } else {
+                alert("浏览器不支持");
+                return false;
+            }
+        }
+
+        // 连接成功打印的消息
+        function setMessage(msg){
+            var message = document.getElementById('message');
+            message.innerHTML+=msg+"<br/>";
+        }
+        //发送消息
+        function send(){
+            var message = document.getElementById('text').value;
+            var pindao = document.getElementById("pindao").value;
+            var socketMsg = {message:message,toUser:pindao}
+            if (pindao ==""){
+                socketMsg.type = 0;//群聊
+            }
+            else {
+                socketMsg.type = 1;//单聊
+            }
+            // websocket.send(name+":"+message);
+            websocket.send(JSON.stringify(socketMsg));//将json对象转换为json字符串
+        }
+        function closeWebsocket() {
+            document.getElementById("btn1").disabled=false;
+            websocket.close();
+        }
+        //监听窗口关闭事件，窗口关闭，连接关闭
+        window.onbeforeunload = function () {
+            websocket.close();
+        }
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</head>
+<body>
+<button onclick="connectWebsocket(event)" id = "btn1">建立</button>
+<button onclick="closeWebsocket()">断开</button>
+<button onclick="goBack()">返回</button>
+<br>
+消息<input type="text" id="text">
+频道号<input type="text" id="pindao">
+<button onclick="send()">发送</button>
+<div id="message">
+
+</div>
+</body>
+</html>

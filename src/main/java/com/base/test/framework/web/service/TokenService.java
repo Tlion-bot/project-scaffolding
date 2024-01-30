@@ -120,8 +120,12 @@ public class TokenService {
         loginUser.setLoginTime(System.currentTimeMillis());
         loginUser.setExpireTime(loginUser.getLoginTime() + tokenProperties.getExpireTime() * MILLIS_MINUTE);
         // 根据uuid将loginUser缓存
+
+
         String userKey = getTokenKey(loginUser.getToken());
         redisCache.setCacheObject(userKey, loginUser, tokenProperties.getExpireTime(), TimeUnit.MINUTES);
+        String userIdKey = getUserIdKey(String.valueOf(loginUser.getUser().getUserId()));
+        redisCache.setCacheObject(userIdKey, userKey, tokenProperties.getExpireTime(), TimeUnit.MINUTES);
     }
 
     /**
@@ -191,5 +195,9 @@ public class TokenService {
 
     private String getTokenKey(String uuid) {
         return Constants.LOGIN_TOKEN_KEY + uuid;
+    }
+
+    private String getUserIdKey(String userId) {
+        return Constants.LOGIN_USERID_KEY + userId;
     }
 }

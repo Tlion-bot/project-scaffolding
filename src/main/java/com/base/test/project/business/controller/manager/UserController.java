@@ -51,6 +51,7 @@ public class UserController {
 
 	private final UserFeignClient userFeignClient;
 
+
 	/**
 	 * 分页列表
 	 */
@@ -103,6 +104,7 @@ public class UserController {
 
 		}
 		   userService.saveBatch(userList);
+
 		return AjaxResult.success();
 	}
 
