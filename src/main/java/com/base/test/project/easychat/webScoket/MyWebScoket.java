@@ -1,9 +1,12 @@
 package com.base.test.project.easychat.webScoket;
 
 import com.alibaba.fastjson.JSONObject;
+import com.base.test.common.constant.Constants;
 import com.base.test.common.core.domain.entity.SysUser;
+import com.base.test.common.core.redis.RedisCache;
 import com.base.test.project.easychat.entity.SocketEntity;
 import com.base.test.project.system.service.impl.SysUserServiceImpl;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +43,9 @@ public class MyWebScoket {
     @Autowired
     private SysUserServiceImpl userService;
 
+    @Autowired
+    private RedisCache redisCache;
+
     //在静态方法中通过 ApplicationContext 来获取 SysUserServiceImpl 的实例。首先需要在 MyWebScoket 类中注入 ApplicationContext。
     private static ApplicationContext applicationContext;
 
@@ -73,7 +79,7 @@ public class MyWebScoket {
      * 成功建立连接调用的方法
      */
     @OnOpen
-    public void onOpen(Session session, @PathParam("userId") String userId) {
+    public void onOpen(Session session, @PathParam("userId") String userId) throws JsonProcessingException {
         //查询 发送人用户信息
 
 
@@ -88,7 +94,10 @@ public class MyWebScoket {
         //用户的唯一uid 和
         map.put(String.valueOf(user.getUserId()), session);
         webScoketset.add(this);//加入set中
-        this.session.getAsyncRemote().sendText(user.getUserName() + "上线了" + "我的频道号是" + user.getUserId() + ",当前连接人数为：" + webScoketset.size());
+     //   this.session.getAsyncRemote().sendText(user.getUserName() + "上线了" + "频道号是" + user.getUserId() +",当前在线人数为：" +applicationContext.getBean(RedisCache.class).keys(Constants.LOGIN_TOKEN_KEY + "*").size() +",当前群聊人数为：" + webScoketset.size());
+        String notice=user.getUserName() + "上线了" + "频道号是" + user.getUserId() +",当前在线人数为：" +applicationContext.getBean(RedisCache.class).keys(Constants.LOGIN_TOKEN_KEY + "*").size() +",当前群聊人数为：" + webScoketset.size();
+
+        notice(notice);
     }
 
 
@@ -162,7 +171,17 @@ public class MyWebScoket {
             myWebScoket.session.getAsyncRemote().sendText(name + ":" + socketEntity.getMessage());
         }
     }
-
+    /**
+     * 上线通知
+     *
+     * @param notice
+     */
+    private void notice(String notice) {
+        for (MyWebScoket myWebScoket : webScoketset) {
+            //发送消息
+            myWebScoket.session.getAsyncRemote().sendText(notice);
+        }
+    }
 
 }
 

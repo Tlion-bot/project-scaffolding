@@ -4,10 +4,46 @@
     <meta charset="UTF-8">
     <title>聊天室</title>
     <style type="text/css">
-        #message{
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        #message {
             margin-top: 20px;
-            padding-left: 20px;
-            border: 1px solid;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            min-height: 100px;
+            max-height: 300px; /* Set a fixed height or adjust as needed */
+            overflow-y: auto; /* Enable vertical scrollbar when content overflows */
+        }
+
+        #btn1, #closeBtn, #goBackBtn, #sendBtn {
+            padding: 10px;
+            margin-right: 10px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #text, #pindao, #user {
+            padding: 10px;
+            margin: 5px 0;
+            width: calc(100% - 20px);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js"></script>
@@ -44,6 +80,7 @@
                         if (response.data.code === 200) {
                             userId = response.data.data.user.userId;
                             name = response.data.data.user.userName;
+                            document.getElementById("user").value=name
                             console.log(name);
                             resolve(); // Resolve the promise when getInfo is successful
                         } else {
@@ -118,6 +155,7 @@
             websocket.send(JSON.stringify(socketMsg));//将json对象转换为json字符串
         }
         function closeWebsocket() {
+            document.getElementById("user").value="";
             document.getElementById("btn1").disabled=false;
             websocket.close();
         }
@@ -131,15 +169,16 @@
     </script>
 </head>
 <body>
-<button onclick="connectWebsocket(event)" id = "btn1">建立</button>
-<button onclick="closeWebsocket()">断开</button>
-<button onclick="goBack()">返回</button>
-<br>
-消息<input type="text" id="text">
-频道号<input type="text" id="pindao">
-<button onclick="send()">发送</button>
-<div id="message">
-
+<div id="container">
+    <button onclick="connectWebsocket(event)" id="btn1">建立</button>
+    <button onclick="closeWebsocket()" id="closeBtn">断开</button>
+    <button onclick="goBack()" id="goBackBtn">返回</button>
+    <br>
+    用户<input type="text" id="user" disabled>
+    消息<input type="text" id="text">
+    频道号<input type="text" id="pindao">
+    <button onclick="send()" id="sendBtn">发送</button>
+    <div id="message"></div>
 </div>
 </body>
 </html>

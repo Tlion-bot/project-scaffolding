@@ -3,14 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        input[type="file"] {
+            margin-bottom: 15px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"], input[type="button"] {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+        }
+
+        input[type="submit"]:hover, input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+
+        input[type="button"] {
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
 <form onsubmit="handleSubmit(event)" enctype="multipart/form-data">
-    <input id="files" name="files" type="file"/>
-    <input type="submit" value="提交"/>
+    <input id="files" name="files" type="file" required/>
+    <input type="submit" value="上传"/>
+    <br>
+    <br>
+    <input type="button" onclick="window.location.href='/chat.html'" value="聊天"></input>
+    <input type="button" onclick="logout()" value="退出登录"></input>
 </form>
-<input type="button"  onclick="window.location.href='/chat.html'" value="聊天"></input>
-<input type="button"  onclick="logout()" value="退出登录"></input>
+
 <script>
     function logout(){
         const formData = new FormData();

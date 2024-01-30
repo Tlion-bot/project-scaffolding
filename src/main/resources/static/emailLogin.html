@@ -1,27 +1,97 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #2d2d2d;
+            color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4caf50;
+            margin-bottom: 30px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        ol {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            box-sizing: border-box;
+            background-color: #3c3c3c;
+            border: 1px solid #555;
+            color: #fff;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        a {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #4caf50;
+            text-decoration: none;
+        }
+
+        img {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-<h1>登录</h1>
-<form onsubmit="handleSubmit(event)">
+<h1>邮箱登录</h1>
 
+<form onsubmit="handleSubmit(event)">
     <ol>
         <li> 邮箱：<input id="email" name="email" type="email">
-        <input type="button" value="获取验证码" onclick="getEmailCode()"> </li>
-        <li> 验证码：<input id="emailVerificationCode" name="emailVerificationCode" type="text"></li>
-        <input type="submit" value="登录">
+            <input type="button" value="获取验证码" onclick="getEmailCode()"> </li>
+        <li> 邮箱验证码：<input id="emailVerificationCode" name="emailVerificationCode" type="text"></li>
 
-        <a href="/register.html" value="注册">注册</a>
+        <input type="submit" value="登录">
+        <a href="/register.html">注册</a>
         <a href="/login.html" value="账号密码登录">账号密码登录</a>
     </ol>
 </form>
+
+
 
 <script>
 </script>

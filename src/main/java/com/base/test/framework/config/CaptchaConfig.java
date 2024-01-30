@@ -18,8 +18,8 @@ import java.awt.*;
 public class CaptchaConfig {
 
     private final int width = 140;
-    private final int height = 40;
-    private final Color background = Color.PINK;
+    private final int height = 60;
+    private final Color background = Color.GRAY;
     private final Font font = new Font("Arial", Font.BOLD, 48);
 
     /**

@@ -1,24 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>注册</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #2d2d2d;
+            color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4caf50;
+            margin-bottom: 30px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        ol {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            box-sizing: border-box;
+            background-color: #3c3c3c;
+            border: 1px solid #555;
+            color: #fff;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        a {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #4caf50;
+            text-decoration: none;
+        }
+
+        img {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-<form onsubmit="handleSubmit(event)">
+<h1>🔍 注册</h1>
 
+
+
+<form onsubmit="handleSubmit(event)">
     <ol>
         <li> 用户：<input id="username" name="username" type="text"></li>
         <li> 密码：<input id="password" name="password" type="password"></li>
         <li> 昵称：<input id="nickName" name="nickName" type="text"></li>
         <li> 电话：<input id="phonenumber" name="phonenumber" type="text"></li>
         <li> 电话：<input id="email" name="email" type="email"></li>
-        <li> 验证码：<input id="captcha" name="captcha" type="text"> <img id="captcha-img" src="" onclick="refreshImage()">
+        <li> 验证码：<input id="captcha" name="captcha" type="text">
         </li>
-        <input type="submit" value="登录">
-        <a href="/register" value="注册"></a>
+        <li><img id="captcha-img" src=""
+                 onclick="refreshImage()">
+        </li>
+        <input type="submit" value="注册">
+        <a href="/login.html">登陆</a>
     </ol>
 </form>
+
 <script src="https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js"></script>
 <script>
     var uuid;
