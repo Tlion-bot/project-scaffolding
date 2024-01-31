@@ -14,7 +14,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -44,22 +43,38 @@ public class MyWebScoket {
     //用户的Service层 数据库操作
 
 
-    @Autowired
-    private SysUserServiceImpl userService;
 
-    @Autowired
-    private RedisCache redisCache;
 
+    private static SysUserServiceImpl userService;
     @Autowired
-    private ChattingService chattingService;
+    public void setSysUserServiceImpl(SysUserServiceImpl userService){
+        MyWebScoket.userService = userService;
+    }
+
+
+
+
+    private static RedisCache redisCache;
+    @Autowired
+    public void setRedisCache(RedisCache redisCache){
+        MyWebScoket.redisCache = redisCache;
+    }
+
+
+
+    private static ChattingService chattingService;
+    @Autowired
+    public void setChattingService(ChattingService chattingService){
+        MyWebScoket.chattingService = chattingService;
+    }
 
     //在静态方法中通过 ApplicationContext 来获取 SysUserServiceImpl 的实例。首先需要在 MyWebScoket 类中注入 ApplicationContext。
-    private static ApplicationContext applicationContext;
+    // private static ApplicationContext applicationContext;
 
-    @Autowired
+/*    @Autowired
     public void setApplicationContext(ApplicationContext applicationContext) {
         MyWebScoket.applicationContext = applicationContext;
-    }
+    }*/
 
 
     public static MyWebScoket myWebScoket;
@@ -89,8 +104,8 @@ public class MyWebScoket {
         //查询 发送人用户信息
 
 
-        //user=userService.selectUserByUserId(Long.valueOf(userId));
-        user = applicationContext.getBean(SysUserServiceImpl.class).selectUserByUserId(Long.valueOf(userId));
+        user=userService.selectUserByUserId(Long.valueOf(userId));
+        //user = applicationContext.getBean(SysUserServiceImpl.class).selectUserByUserId(Long.valueOf(userId));
         //存储信息
         this.session = session;
         //取用户的唯一uid 强转下类型
@@ -101,7 +116,7 @@ public class MyWebScoket {
         map.put(String.valueOf(user.getUserId()), session);
         webScoketset.add(this);//加入set中
         //   this.session.getAsyncRemote().sendText(user.getUserName() + "上线了" + "频道号是" + user.getUserId() +",当前在线人数为：" +applicationContext.getBean(RedisCache.class).keys(Constants.LOGIN_TOKEN_KEY + "*").size() +",当前群聊人数为：" + webScoketset.size());
-        String notice = user.getUserName() + "上线了" + "频道号是" + user.getUserId() + ",当前在线人数为：" + applicationContext.getBean(RedisCache.class).keys(Constants.LOGIN_TOKEN_KEY + "*").size() + ",当前群聊人数为：" + webScoketset.size();
+        String notice = user.getUserName() + "上线了" + "频道号是" + user.getUserId() + ",当前在线人数为：" + redisCache.keys(Constants.LOGIN_TOKEN_KEY + "*").size() + ",当前群聊人数为：" + webScoketset.size();
 
         notice(notice);
     }
@@ -159,16 +174,17 @@ public class MyWebScoket {
                         .setStatus(1)
                 ;
                 // UserService.instUser(user.getUid(), Integer.parseInt(socketEntity.getToUser()),jsonObject.get("message").toString(),jsonObject.get("type").toString(),1);
-                applicationContext.getBean(ChattingService.class).save(chatting);
+
                 fromsession.getAsyncRemote().sendText(name + "(本人)" + ":" + socketEntity.getMessage());//发送消息
                 tosession.getAsyncRemote().sendText(name + ":" + socketEntity.getMessage());//发送消息
+                chattingService.save(chatting);
             } else {
 
 
                 // 存储聊天记录  未读  存进聊天记录表
                 //UserService.instUser(user.getUid(), Integer.parseInt(socketEntity.getToUser()),jsonObject.get("message").toString(),jsonObject.get("type").toString(),0);
 
-                List<Long> sysUsersIds = applicationContext.getBean(SysUserServiceImpl.class).list(Wrappers.lambdaQuery(SysUser.class).eq(SysUser::getDelFlag, 0)).stream().map(SysUser::getUserId).collect(Collectors.toList());
+                List<Long> sysUsersIds = userService.list(Wrappers.lambdaQuery(SysUser.class).eq(SysUser::getDelFlag, 0)).stream().map(SysUser::getUserId).collect(Collectors.toList());
                 if (!sysUsersIds.contains(Long.valueOf(socketEntity.getToUser()))) {
                     fromsession.getAsyncRemote().sendText("系统消息:您输入的频道号有误,未找到用户");//发送消息
 
@@ -184,9 +200,10 @@ public class MyWebScoket {
                                     .setStime(DateUtil.date())
                                     .setStatus(0)
                             ;
-                            applicationContext.getBean(ChattingService.class).save(chatting);
+
                             fromsession.getAsyncRemote().sendText(name + "(本人)" + ":" + socketEntity.getMessage());//发送消息
                             fromsession.getAsyncRemote().sendText("系统消息:对方不在线");//发送消息
+                            chattingService.save(chatting);
                         }
                     }
 
