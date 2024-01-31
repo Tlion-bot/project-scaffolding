@@ -1,9 +1,13 @@
 package com.base.test.project.easychat.webScoket;
 
+import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.base.test.common.constant.Constants;
 import com.base.test.common.core.domain.entity.SysUser;
 import com.base.test.common.core.redis.RedisCache;
+import com.base.test.project.business.domain.Chatting;
+import com.base.test.project.business.service.ChattingService;
 import com.base.test.project.easychat.entity.SocketEntity;
 import com.base.test.project.system.service.impl.SysUserServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -23,6 +27,7 @@ import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.stream.Collectors;
@@ -39,12 +44,14 @@ public class MyWebScoket {
     //用户的Service层 数据库操作
 
 
-
     @Autowired
     private SysUserServiceImpl userService;
 
     @Autowired
     private RedisCache redisCache;
+
+    @Autowired
+    private ChattingService chattingService;
 
     //在静态方法中通过 ApplicationContext 来获取 SysUserServiceImpl 的实例。首先需要在 MyWebScoket 类中注入 ApplicationContext。
     private static ApplicationContext applicationContext;
@@ -53,7 +60,6 @@ public class MyWebScoket {
     public void setApplicationContext(ApplicationContext applicationContext) {
         MyWebScoket.applicationContext = applicationContext;
     }
-
 
 
     public static MyWebScoket myWebScoket;
@@ -94,8 +100,8 @@ public class MyWebScoket {
         //用户的唯一uid 和
         map.put(String.valueOf(user.getUserId()), session);
         webScoketset.add(this);//加入set中
-     //   this.session.getAsyncRemote().sendText(user.getUserName() + "上线了" + "频道号是" + user.getUserId() +",当前在线人数为：" +applicationContext.getBean(RedisCache.class).keys(Constants.LOGIN_TOKEN_KEY + "*").size() +",当前群聊人数为：" + webScoketset.size());
-        String notice=user.getUserName() + "上线了" + "频道号是" + user.getUserId() +",当前在线人数为：" +applicationContext.getBean(RedisCache.class).keys(Constants.LOGIN_TOKEN_KEY + "*").size() +",当前群聊人数为：" + webScoketset.size();
+        //   this.session.getAsyncRemote().sendText(user.getUserName() + "上线了" + "频道号是" + user.getUserId() +",当前在线人数为：" +applicationContext.getBean(RedisCache.class).keys(Constants.LOGIN_TOKEN_KEY + "*").size() +",当前群聊人数为：" + webScoketset.size());
+        String notice = user.getUserName() + "上线了" + "频道号是" + user.getUserId() + ",当前在线人数为：" + applicationContext.getBean(RedisCache.class).keys(Constants.LOGIN_TOKEN_KEY + "*").size() + ",当前群聊人数为：" + webScoketset.size();
 
         notice(notice);
     }
@@ -139,18 +145,52 @@ public class MyWebScoket {
             Session fromsession = map.get(socketEntity.getFromUser());
             //确定受信人
             Session tosession = map.get(socketEntity.getToUser());
+
             //通道保持畅通
             if (tosession != null) {
                 // 存储聊天记录  已读  存进聊天记录表
-               // UserService.instUser(user.getUid(), Integer.parseInt(socketEntity.getToUser()),jsonObject.get("message").toString(),jsonObject.get("type").toString(),1);
-
-                fromsession.getAsyncRemote().sendText(name+"(本人)" + ":" + socketEntity.getMessage());//发送消息
+                Chatting chatting = new Chatting();
+                chatting
+                        .setFid(user.getUserId())
+                        .setTid(Long.valueOf(socketEntity.getToUser()))
+                        .setMessage(jsonObject.get("message").toString())
+                        .setType(Integer.valueOf(jsonObject.get("type").toString()))
+                        .setStime(DateUtil.date())
+                        .setStatus(1)
+                ;
+                // UserService.instUser(user.getUid(), Integer.parseInt(socketEntity.getToUser()),jsonObject.get("message").toString(),jsonObject.get("type").toString(),1);
+                applicationContext.getBean(ChattingService.class).save(chatting);
+                fromsession.getAsyncRemote().sendText(name + "(本人)" + ":" + socketEntity.getMessage());//发送消息
                 tosession.getAsyncRemote().sendText(name + ":" + socketEntity.getMessage());//发送消息
             } else {
+
+
                 // 存储聊天记录  未读  存进聊天记录表
                 //UserService.instUser(user.getUid(), Integer.parseInt(socketEntity.getToUser()),jsonObject.get("message").toString(),jsonObject.get("type").toString(),0);
 
-                fromsession.getAsyncRemote().sendText("系统消息:对方不在线或者您输入的频道号有误");//发送消息
+                List<Long> sysUsersIds = applicationContext.getBean(SysUserServiceImpl.class).list(Wrappers.lambdaQuery(SysUser.class).eq(SysUser::getDelFlag, 0)).stream().map(SysUser::getUserId).collect(Collectors.toList());
+                if (!sysUsersIds.contains(Long.valueOf(socketEntity.getToUser()))) {
+                    fromsession.getAsyncRemote().sendText("系统消息:您输入的频道号有误,未找到用户");//发送消息
+
+                } else {
+                    for (Long id : sysUsersIds) {
+                        if (Long.valueOf(socketEntity.getToUser()).equals(id)) {
+                            Chatting chatting = new Chatting();
+                            chatting
+                                    .setFid(user.getUserId())
+                                    .setTid(Long.valueOf(socketEntity.getToUser()))
+                                    .setMessage(jsonObject.get("message").toString())
+                                    .setType(Integer.valueOf(jsonObject.get("type").toString()))
+                                    .setStime(DateUtil.date())
+                                    .setStatus(0)
+                            ;
+                            applicationContext.getBean(ChattingService.class).save(chatting);
+                            fromsession.getAsyncRemote().sendText(name + "(本人)" + ":" + socketEntity.getMessage());//发送消息
+                            fromsession.getAsyncRemote().sendText("系统消息:对方不在线");//发送消息
+                        }
+                    }
+
+                }
             }
         } else {
             //   广播群发给每一个客户端
@@ -173,8 +213,9 @@ public class MyWebScoket {
             //发送消息
             myWebScoket.session.getAsyncRemote().sendText(name + ":" + socketEntity.getMessage());
         }
-        this.session.getAsyncRemote().sendText(name +"(本人)"+ ":" + socketEntity.getMessage());
+        this.session.getAsyncRemote().sendText(name + "(本人)" + ":" + socketEntity.getMessage());
     }
+
     /**
      * 上线通知
      *
