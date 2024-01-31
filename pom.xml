@@ -414,6 +414,12 @@
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
 
+        <!-- t-io-->
+        <dependency>
+            <groupId>org.t-io</groupId>
+            <artifactId>tio-websocket-server</artifactId>
+            <version>3.7.0.v20201010-RELEASE</version>
+        </dependency>
 
 
     </dependencies>
