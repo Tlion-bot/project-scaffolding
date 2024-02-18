@@ -1,11 +1,13 @@
 package com.base.test.project.easychat.webScoket;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.base.test.common.constant.Constants;
 import com.base.test.common.core.domain.entity.SysUser;
 import com.base.test.common.core.redis.RedisCache;
+import com.base.test.common.exception.CustomException;
 import com.base.test.project.business.domain.Chatting;
 import com.base.test.project.business.service.ChattingService;
 import com.base.test.project.easychat.entity.SocketEntity;
@@ -43,28 +45,26 @@ public class MyWebScoket {
     //用户的Service层 数据库操作
 
 
-
-
     private static SysUserServiceImpl userService;
+
     @Autowired
-    public void setSysUserServiceImpl(SysUserServiceImpl userService){
+    public void setSysUserServiceImpl(SysUserServiceImpl userService) {
         MyWebScoket.userService = userService;
     }
 
 
-
-
     private static RedisCache redisCache;
+
     @Autowired
-    public void setRedisCache(RedisCache redisCache){
+    public void setRedisCache(RedisCache redisCache) {
         MyWebScoket.redisCache = redisCache;
     }
 
 
-
     private static ChattingService chattingService;
+
     @Autowired
-    public void setChattingService(ChattingService chattingService){
+    public void setChattingService(ChattingService chattingService) {
         MyWebScoket.chattingService = chattingService;
     }
 
@@ -104,9 +104,13 @@ public class MyWebScoket {
         //查询 发送人用户信息
 
 
-        user=userService.selectUserByUserId(Long.valueOf(userId));
+        user = userService.selectUserByUserId(Long.valueOf(userId));
         //user = applicationContext.getBean(SysUserServiceImpl.class).selectUserByUserId(Long.valueOf(userId));
         //存储信息
+        if (ObjectUtil.isEmpty(user)) {
+            new CustomException("未找到用户");
+            System.out.println("未找到用户");
+        }
         this.session = session;
         //取用户的唯一uid 强转下类型
         this.userId = String.valueOf(user.getUserId());
