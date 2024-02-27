@@ -1,4 +1,4 @@
-package com.base.test.java;
+package com.base.test.java.sty;
 
 /**
  *finalize()方法调用不是及时执行

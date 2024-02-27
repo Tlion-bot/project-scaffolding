@@ -1,4 +1,4 @@
-package com.base.test.java;
+package com.base.test.java.sty;
 
 public class ThreadWaitAndNotify {
     // 创建一个将被两个线程同时访问的共享对象

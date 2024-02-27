@@ -35,6 +35,7 @@ public class Work01 {
         };
 
         //消息的接受
+        System.out.println("c2等待接受消息.....");
         channel.basicConsume(QUEUE_NAME,true,deliverCallback,cancelCallback);
     }
 }

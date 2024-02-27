@@ -1,4 +1,4 @@
-package com.base.test.java;
+package com.base.test.java.sty;
 
 import com.base.test.common.utils.DateUtils;
 

@@ -1,4 +1,4 @@
-package com.base.test.java;
+package com.base.test.java.sty;
 
 public class SynchronizedDemo {
     public void method() {

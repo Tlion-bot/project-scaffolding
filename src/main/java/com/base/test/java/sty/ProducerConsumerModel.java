@@ -1,4 +1,4 @@
-package com.base.test.java;
+package com.base.test.java.sty;
 
 import java.util.Date;
 import java.util.LinkedList;

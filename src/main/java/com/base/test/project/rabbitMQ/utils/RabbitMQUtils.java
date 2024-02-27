@@ -22,7 +22,7 @@ public class RabbitMQUtils {
         //工厂IP 连接RabbitMQ对列
         factory.setHost("192.168.70.128");
         //用户名
-        factory.setUsername("root");
+        factory.setUsername("admin");
         //密码
         factory.setPassword("1982570424");
 
