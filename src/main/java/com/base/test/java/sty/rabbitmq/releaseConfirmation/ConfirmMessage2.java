@@ -1,7 +1,7 @@
-package com.base.test.project.rabbitMQ.releaseConfirmation;
+package com.base.test.java.sty.rabbitmq.releaseConfirmation;
 
 import cn.hutool.core.lang.UUID;
-import com.base.test.project.rabbitMQ.utils.RabbitMQUtils;
+import com.base.test.java.sty.rabbitmq.utils.RabbitMQUtils;
 import com.rabbitmq.client.Channel;
 
 import java.io.IOException;

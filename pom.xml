@@ -428,6 +428,11 @@
             <artifactId>amqp-client</artifactId>
             <version>5.8.0</version>
         </dependency>
+        <!--RabbitMQ 依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
         <!--操作文件流的一个依赖-->
         <dependency>
             <groupId>commons-io</groupId>

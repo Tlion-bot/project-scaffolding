@@ -131,6 +131,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/*").permitAll()
                 .antMatchers("/email/*").permitAll()
               .antMatchers("/websocket/*").permitAll()
+              .antMatchers("/ttl/sendMsg/*").permitAll()
               .antMatchers("/").permitAll()
 
 

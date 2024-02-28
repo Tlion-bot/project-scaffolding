@@ -1,4 +1,4 @@
-package com.base.test.project.rabbitMQ.utils;
+package com.base.test.java.sty.rabbitmq.utils;
 
 public class SleepUtils {
     public static void sleep(int second){

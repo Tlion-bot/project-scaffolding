@@ -1,4 +1,4 @@
-package com.base.test.project.rabbitMQ.helloRabbitMq;
+package com.base.test.java.sty.rabbitmq.helloRabbitMq;
 
 
 import com.rabbitmq.client.Channel;
