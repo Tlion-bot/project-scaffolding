@@ -307,7 +307,10 @@ spring:
     host: @rabbitmq.host@
     username: @rabbitmq.username@
     password: @rabbitmq.password@
-    #	4369 -- erlang发现口 5672 --client端通信口 15672 -- 管理界面ui端口 25672 -- server间内部通信口
+    #	4369 -- erlang发现口    5672 --client端通信口    15672 -- 管理界面ui端口    25672 -- server间内部通信口
     #	如果采用java等等，连接rabbitmq 应该使用：5672
     port: @rabbitmq.port@
-
+    publisher-confirm-type: @rabbitmq.publisher-confirm-type@
+    publisher-returns: true
+    template:
+      mandatory: true
