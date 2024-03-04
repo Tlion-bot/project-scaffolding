@@ -111,6 +111,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.html",
                         "/**/*.css",
                         "/**/*.png",
+                        "/**/*.docx",
                         "/**/*.js"
                 ).permitAll()
                 .antMatchers("/profile/**").anonymous()
@@ -134,7 +135,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
               .antMatchers("/ttl/*/*").permitAll()
               .antMatchers("/ttl/*/*/*").permitAll()
               .antMatchers("/confirm/*/*").permitAll()
-
+              .antMatchers("/doc/*").permitAll()
               .antMatchers("/").permitAll()
 
 
