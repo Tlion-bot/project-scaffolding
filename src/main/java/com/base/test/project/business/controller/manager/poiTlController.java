@@ -4,10 +4,10 @@ package com.base.test.project.business.controller.manager;
 import com.base.test.common.core.domain.AjaxResult;
 import com.deepoove.poi.XWPFTemplate;
 import com.deepoove.poi.util.PoitlIOUtils;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
@@ -18,7 +18,7 @@ import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.util.HashMap;
 
-@Controller
+@RestController
 @RequestMapping("/doc")
 public class poiTlController {
 

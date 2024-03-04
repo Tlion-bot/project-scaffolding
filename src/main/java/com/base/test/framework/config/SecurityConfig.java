@@ -136,6 +136,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
               .antMatchers("/ttl/*/*/*").permitAll()
               .antMatchers("/confirm/*/*").permitAll()
               .antMatchers("/doc/*").permitAll()
+              .antMatchers("/mongDB/*").permitAll()
               .antMatchers("/").permitAll()
 
 

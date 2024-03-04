@@ -314,3 +314,7 @@ spring:
     publisher-returns: true
     template:
       mandatory: true
+
+    data:
+      mongodb:
+        uri: @mongodb.uri@
