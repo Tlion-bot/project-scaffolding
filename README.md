@@ -1,5 +1,4 @@
 This project is a scaffold for rapid project construction, integrating database, Redis, email, WeChat official account, es, rabbitmq, mongodb
-Dependency changes
 ## 内置功能
 1.  用户管理：用户是系统操作者，该功能主要完成系统用户配置。
 2.  部门管理：配置系统组织机构（公司、部门、小组），树结构展现支持数据权限。
