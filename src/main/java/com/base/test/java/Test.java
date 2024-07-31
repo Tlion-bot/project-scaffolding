@@ -1,14 +1,14 @@
 package com.base.test.java;
 
-import cn.hutool.core.util.StrUtil;
+import com.base.test.java.killport.KillPortUtils;
 
-import java.math.BigInteger;
+import java.io.IOException;
 
 public class Test {
-    public static void main(String[] args) {
-        String config=null;
 
-        System.out.println((StrUtil.isNotBlank(config) ? new BigInteger(config) : BigInteger.valueOf(0)));
+
+        public static void main(String[] args) throws IOException {
+            KillPortUtils.start(8329);
+
+        }
     }
-
-}
