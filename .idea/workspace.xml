@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a3b409f-c729-4ecd-ac68-0625481a6517" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/calculate/StrHelper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-scaffolding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/project-scaffolding.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +36,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../istest" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.webservices" />
   </component>
   <component name="RecentsManager">
@@ -41,13 +47,20 @@
       <recent name="F:\self\project-scaffolding" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Test (1)">
+    <configuration name="Test (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Test" />
+      <module name="project-scaffolding" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.base.test.java.Test" />
+      <option name="MAIN_CLASS_NAME" value="com.base.test.Test" />
       <module name="project-scaffolding" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.base.test.java.*" />
+          <option name="PATTERN" value="com.base.test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -57,6 +70,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Test (1)" />
         <item itemvalue="Application.Test" />
       </list>
     </recent_temporary>
@@ -69,7 +83,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1728980458951</updated>
-      <workItem from="1728980460658" duration="314000" />
+      <workItem from="1728980460658" duration="1101000" />
+      <workItem from="1728981596828" duration="489000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1728980561038</created>
@@ -78,7 +93,14 @@
       <option name="project" value="LOCAL" />
       <updated>1728980561038</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="ignore out dir">
+      <created>1728981041594</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1728981041594</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -86,6 +108,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="ignore out dir" />
+    <option name="LAST_COMMIT_MESSAGE" value="ignore out dir" />
   </component>
 </project>
