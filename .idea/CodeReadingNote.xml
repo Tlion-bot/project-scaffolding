@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CodeReadingNote">
+    <topics>
+      <topic>
+        <name>idea</name>
+        <note>（1）Ctrl+Alt+L 格式化代码
+（2）Ctrl+Alt+O 优化 Imports
+（3）Ctrl+Allt+B：查看实现类。
+（4）Ctrl+F/Ctrl+R   当前文件查找、替换
+（5）Ctrl+Shift+F/R    全局文件查找/替换
+（6）Ctrl+Alt+T 使用(if..else, try..catch, for, synchronized 等)包围选中语句
+（7）Ctrl+Shift+/ 使用“/** **/”注释或取消注释
+（8）Ctrl + X 删除当前行
+（9）Ctrl +D  复制当前行
+（10）CTRL+ALT+I  自动缩进
+（11）Shift + Shift 快速搜索
+（12）psvm,速生成main
+（13）sout,速生成System.out.print
+（14）CTRL+E 最近更改的代码  
+（15）CTRL+P   方法参数提示
+（16）F7 在Debug下进入当前方法体；
+（17）F8 在Debug下进行到下一步；
+（18）F9 在Debug下跳转到下一断点,恢复程序：；</note>
+        <updatedAt>2023-03-10 09:48:38</updatedAt>
+        <topicLines />
+      </topic>
+    </topics>
+    <state lastExportDir="" lastImportDir="" />
+  </component>
+</project>
