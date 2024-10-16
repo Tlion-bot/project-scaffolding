@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/maven/maven.iml" filepath="$PROJECT_DIR$/maven/maven.iml" />
       <module fileurl="file://$PROJECT_DIR$/project-scaffolding.iml" filepath="$PROJECT_DIR$/project-scaffolding.iml" />
     </modules>
   </component>
